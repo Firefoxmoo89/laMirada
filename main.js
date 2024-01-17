@@ -28,7 +28,7 @@ http.createServer((request, response) => { // request is object
       serveFile("templates/apply.html",200,{"Content-type":"text/html"});
     } else if (request.method == "POST") {
       // submittedApplication (request)
-      response.end(JSON.stringify({"feedback": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
+      response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
     }
   }
   else if (deets.pathname == "/contact") {
@@ -37,7 +37,7 @@ http.createServer((request, response) => { // request is object
     } else if (request.method == "POST") {
       formData = deets.query;
       // sendEmail("Inquiry from "+formData.name,formData.body,formData.name+"<br>Email: "+formData.address+"<br>Number: "+formData.number+"<br>Prefers: "+formData.contactMethod);
-      response.end(JSON.stringify({"feedback":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
+      response.end(JSON.stringify({"response":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
     }
   }
   else {
