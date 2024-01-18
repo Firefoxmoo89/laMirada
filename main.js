@@ -1,31 +1,23 @@
 var http = require('http'); var url = require("url"); var fs = require("fs"); var rad = require("./radicalModule.js");
+console.log("Go to http://localhost:3000")  
 
 http.createServer((request, response) => { // request is object
   
+
   deets = url.parse(request.url, true); // deets.query for post ? information as object
-  fs.readFile("templates/top.html",(error,data) => { htmlTop = data })
-  fs.readFile("templates/bottom.html",(error,data) => {htmlBottom = data})
-  
-  function serveFile(file,status,headers) {
-    fs.readFile(file,(error,data) => {
-      response.writeHead(status,headers);         // (status 200 ok, response headers object)
-      response.write(htmlTop+data+htmlBottom);    // html content
-      response.end();
-    });
-  }
 
   if (deets.pathname == "/") {
-    response.writeHead(302, {
-      "Location": "templates/location.html",
+    response.writeHead(301, {
+      Location: "location",
     });
     response.end();
   }
   else if (deets.pathname == "/location") {
-    serveFile("templates/location.html",200,{"Content-type":"text/html"});
+    rad.serveFile("template/location.html",200,{"Content-type":"text/html"},response);
   }
   else if (deets.pathname == "/apply") {
     if (request.method == "GET") {
-      serveFile("templates/apply.html",200,{"Content-type":"text/html"});
+      rad.serveFile("template/apply.html",200,{"Content-type":"text/html"},response);
     } else if (request.method == "POST") {
       // submittedApplication (request)
       response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
@@ -33,14 +25,21 @@ http.createServer((request, response) => { // request is object
   }
   else if (deets.pathname == "/contact") {
     if (request.method == "GET") {
-      serveFile("template/contact.html",200,{"Content-type":"text/html"});
+      rad.serveFile("template/contact.html",200,{"Content-type":"text/html"},response);
     } else if (request.method == "POST") {
       formData = deets.query;
       // sendEmail("Inquiry from "+formData.name,formData.body,formData.name+"<br>Email: "+formData.address+"<br>Number: "+formData.number+"<br>Prefers: "+formData.contactMethod);
       response.end(JSON.stringify({"response":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
     }
   }
-  else {
-    serveFile("template/missing.html",404,{"Content-type":"text/html"});
+  else if (deets.pathname.includes("/static")) {
+    if (deets.pathname.includes("/css")) { headers = {"Content-type":"text/css"} }
+    else if (deets.pathname.includes("js")) { headers = {"Content-type":"text/javascript"} }
+    else if (deets.pathname.includes("png")) { headers = {"Content-type":"image/png"} }
+    else { headers = {} }
+    rad.serveFile(deets.pathname.slice(1),200,headers,response);
   }
-console.log("Listening at https://localhost:8080")}).listen(8080);
+  else {
+    rad.serveFile("template/missing.html",404,{"Content-type":"text/html"},response);
+  }
+}).listen(3000);
