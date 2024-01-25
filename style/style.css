@@ -9,42 +9,55 @@ header {
 	display: flex; flex-direction: row; align-items: center;
 	width: 100%; height: 60px;
 	padding: 5px 10px 5px 10px;
-	background-color: #ffffff;
+	background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px);
+	box-shadow: 0 2px 3px rgba(0,0,0,.3);
 }
 img#banner { height: 100% } a:has(> img#banner) { display: block; height: 100%; }
-nav {
-	flex-grow: 1;	display: flex; flex-direction: row; align-items: center; justify-content: flex-end;
-}
-nav a {
-	text-decoration: none; color: #414042; font-weight: 600;
+@keyframes navHover {	0% { background-color: none }	100% { background-color: #ececec } }
+@keyframes applyHover {	0% { background-color: none }	100% { background-color: #1db7f2 } }
+nav {	flex-grow: 1;	display: flex; flex-direction: row; align-items: center; justify-content: flex-end }
+nav > a, nav > a:visited {
+	text-decoration: none; color: #414042; font-weight: 550;
 	border-radius: 4px;
-	padding: 10px; margin: 0 10px 0 10px;
-} nav a:hover { background-color: #b9b9b9 }
-nav a#navApply { background-color: #0c9ad0; color: #ffffff } nav a#navApply:hover { background-color: #1db7f2 }
+	padding: 6px 10px 6px 10px; margin: 0 10px 0 10px;
+} nav > a:hover, nav > a:visited:hover { animation: navHover 0.2s linear; animation-fill-mode: forwards }
+nav > a#navApply { background-color: #0c9ad0; color: #ffffff } nav a#navApply:hover { animation: applyHover 0.2s linear; animation-fill-mode: forwards }
 div#main {
 	display: flex; flex-direction: column;
 	width: 100%;
 }
 div#main > section {
 	width: 100%;
-	padding: 20px 20vw 20px 20vw;
+	padding: 25px 25vw 25px 25vw;
 	text-align: center;
 } div#main > section.colored { background-color: #0C9AD0; color: #ffffff }
 footer {
 	display: flex; flex-direction: row; justify-content: space-between; 
 	width: 100%;
-	padding: 20px 20vw 20px 20vw;
+	padding: 25px 15vw 25px 15vw;
 	background-color:#2b303a;
 }
 footer > section {
-	width: 25%; padding: 0; text-align: center;
+	display: flex; flex-direction: column; justify-items: center; justify-content: center;
+	padding: 0; text-align: left;
 }
+footer > section > div { display:flex;flex-direction:row;align-items:center }
+@keyframes footerHover { 0% { color: #ffffff } 100% { color: #0c9ad0 } }
+footer a, footer a:visited { 
+	display: block; opacity: .8;
+	margin: 5px;
+	color: #ffffff; text-decoration: none;
+} footer a:hover,footer a:visited:hover { animation: footerHover .2s linear; animation-fill-mode: forwards }
+
+/* General Page Formatting */
+div#main a,div#main a:visited { text-decoration: none; color: #414042; font-weight: 600 } div#main a:hover,div#main a:visited:hover { color: #625f64 }
 img.logo {
 	width: 100px;
 	margin: 2px;
 }
 
-/* General Page Formatting */
+
+
 
 
 

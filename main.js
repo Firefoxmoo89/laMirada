@@ -32,13 +32,9 @@ http.createServer((request, response) => { // request is object
       response.end(JSON.stringify({"response":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
     }
   }
-  else if (deets.pathname.includes("/static")) {
-    if (deets.pathname.includes("/css")) { headers = {"Content-type":"text/css"} }
-    else if (deets.pathname.includes("js")) { headers = {"Content-type":"text/javascript"} }
-    else if (deets.pathname.includes("png")) { headers = {"Content-type":"image/png"} }
-    else { headers = {} }
-    rad.serveFile(deets.pathname.slice(1),200,headers,response);
-  }
+  else if (deets.pathname.includes("/style")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/css"},response) }
+  else if (deets.pathname.includes("script")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/javascript"},response) }
+  else if (deets.pathname.includes("image")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"image/png"},response) }
   else {
     rad.serveFile("template/missing.html",404,{"Content-type":"text/html"},response);
   }
