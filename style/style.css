@@ -1,4 +1,4 @@
-/* HTML basic structure */
+/* _______________________________HTML basic structure________________________________ */
 * {	box-sizing: border-box }
 body { 
 	margin: 0; padding: 0;
@@ -8,7 +8,7 @@ header {
 	position: sticky; top: 0;
 	display: flex; flex-direction: row; align-items: center;
 	width: 100%; height: 60px;
-	padding: 5px 10px 5px 10px;
+	padding: 5px 10px;
 	background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px);
 	box-shadow: 0 2px 3px rgba(0,0,0,.3);
 }
@@ -19,29 +19,31 @@ nav {	flex-grow: 1;	display: flex; flex-direction: row; align-items: center; jus
 nav > a, nav > a:visited {
 	text-decoration: none; color: #414042; font-weight: 550;
 	border-radius: 4px;
-	padding: 6px 10px 6px 10px; margin: 0 10px 0 10px;
+	padding: 6px 10px; margin: 0 10px 0 10px;
 } nav > a:hover, nav > a:visited:hover { animation: navHover 0.2s linear; animation-fill-mode: forwards }
 nav > a#navApply { background-color: #0c9ad0; color: #ffffff } nav a#navApply:hover { animation: applyHover 0.2s linear; animation-fill-mode: forwards }
 div#main {
 	display: flex; flex-direction: column;
 	width: 100%;
 }
-div#main > section {
-	width: 100%;
-	padding: 25px 25vw 25px 25vw;
+div#main > section.colored { background-color: #0C9AD0; color: #ffffff }
+div#main > section > div {
+	max-width: 100%; width: 960px;
+	margin: auto;	padding: 4rem 6rem;
 	text-align: center;
-} div#main > section.colored { background-color: #0C9AD0; color: #ffffff }
-footer {
-	display: flex; flex-direction: row; justify-content: space-between; 
-	width: 100%;
-	padding: 25px 15vw 25px 15vw;
-	background-color:#2b303a;
 }
-footer > section {
+footer { width: 100%; background-color:#2b303a }
+footer > div {
+	display: flex; flex-direction: row; justify-content: space-between;
+	max-width: 100%; width: 960px;
+	margin: auto;	padding: 4rem 6rem;
+	text-align: center;
+}
+footer > div > section {
 	display: flex; flex-direction: column; justify-items: center; justify-content: center;
 	padding: 0; text-align: left;
 }
-footer > section > div { display:flex;flex-direction:row;align-items:center }
+footer > div > section > div { display: flex; flex-direction: row; align-items: center }
 @keyframes footerHover { 0% { color: #ffffff } 100% { color: #0c9ad0 } }
 footer a, footer a:visited { 
 	display: block; opacity: .8;
@@ -49,244 +51,63 @@ footer a, footer a:visited {
 	color: #ffffff; text-decoration: none;
 } footer a:hover,footer a:visited:hover { animation: footerHover .2s linear; animation-fill-mode: forwards }
 
-/* General Page Formatting */
+/* ___________________________General Page Formatting___________________________________ */
 div#main a,div#main a:visited { text-decoration: none; color: #414042; font-weight: 600 } div#main a:hover,div#main a:visited:hover { color: #625f64 }
-img.logo {
-	width: 100px;
-	margin: 2px;
-}
-iframe.video {
-	width: 100%;
-	aspect-ratio: 16/9;
-}
-img.articleImage {
-	width: 80%;
-	margin: 5vh 10% 0px 10%;
-}
-p.articleText {
-	margin: 40px 0px 0px 0px;
-	font-size: 1.3em;
-	line-height: 1.8;
-} 
-h1.articleText {
-	margin: 40px 0px 0px 0px;
-  font-family: Roboto,sans-serif;
-  font-size: 3.7rem;
-  color: #0c9ad0;
-  line-height: 1.2;
-  font-weight: 350;
-} 
-h2.articleText {
-	margin: 40px 0px 0px 0px;
-  font-family: Roboto,sans-serif;  font-size: 2.5rem;
-  line-height: 1.2; font-weight: 300;
-	color: #0c9ad0;
-} 
-h3.articleText {
-	margin: 40px 0px 0px 0px;
-  font-family: Roboto,sans-serif;  font-size: 1.5rem;
-  line-height: 1.2; font-weight: 300;
-	color: #0c9ad0;
-} 
-h1:focus, h2:focus, h3:focus, p.articleText { 
-	outline: none; margin: 40px min(2%,10px) 0px min(2%,10px); 
-}
-h1:empty::before, h2:empty::before, h3:empty::before, p:empty::before { 
-	content: "Type Here"; color: #7a7194; font-weight: bold; 
-}
-
+img.logo { width: 100px; margin: 2px }
+h1 { margin-top: 0; font-weight: 300; line-height: 1.2; font-size: 2.5em; text-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px }
 label,div.label {
 	cursor: pointer;
 	font-weight: bold;
 	display: block;	margin: 30px 0 0 0;
 }
-input[type="checkbox"]+label { display: inline }
-input[type="radio"] {	display: none }
-input[type="radio"]+label {
-	padding: 10px 20% 10px 20%;	margin: 5px 20% 5px 20%; 
+input[type="radio"],input[type="checkbox"]:not(.simple) { display: none }
+input[type="radio"]+label,input[type="checkbox"]:not(.simple) {
+	padding: 10px 20%; margin: 5px 20%; 
 	display: block;
 	width: 60%;
 	background-color: #a9dff4;
 	border-radius: 8px;
 }
-input[type="radio"]:checked+label {
-	padding: 20px 20% 20px 20%;
-	background-color: #0c9ad0; color: white;
+input[type="radio"]:checked+label,input[type="checkbox"]:not(.simple):checked+label {
+	padding: 20px 20%;
+	background-color: #10b3f4;
 	font-weight: bold;
 }
-input[type="radio"]+label.inline { display:inline; margin: 0; padding: 10px 20px 10px 20px }
-input[type="radio"]:checked+label.inline { padding: 10px 20px 10px 20px }
-
-input[type="text"],
-textarea,
-input[type="password"],
-input[type="email"],
-input[type="tel"] {
+input[type="radio"]+label.inline,input[type="checkbox"]:not(.simple)+label.inline { display:inline; margin: 0; padding: 10px 20px }
+input[type="radio"]:checked+label.inline,input[type="checkbox"]:not(.simple):checked+label.inline { padding: 10px 20px }
+input[type="checkbox"].simple { margin: 0 10px; width: 1.5em; height: 1.5em } input[type="checkbox"].simple+label { display: inline }
+input:not([type="checkbox"],[type="radio"],[type="file"],[type="range"]),textarea {
 	margin: 0 10% 0 10%; padding: .7em 1em;
 	display: block;
 	cursor: pointer; font-size: 1.1em;
 	width: 80%; 
 	border: none; border-radius: 8px; outline: none;
-	background-color: #0c9ad0;
-}
-textarea { height: 16vh; resize: vertical; } textarea:placeholder { padding: 5px; }
-input[type="date"] { padding: 0.5em; font-size: 1.2em; }
-
-input[type="date"],
-input[type="number"],
-input[type="checkbox"] {
-	margin: 0 10px 0 10px;
-	border: none; border-radius: 8px; outline: none;
-	background-color: #0c9ad0; cursor: pointer;
-}
-input[type="checkbox"] { width: 1.5em; height: 1.5em }
-input[type="range"] { cursor: crosshair }
-input[type="number"].money { 
-	background-image: url("https://la-mirada.orolake.repl.co/static/hiddenImages/dollarSign.png");
-	padding-left: 30px; background-size: 20px;
-	background-position: 10px; background-repeat: no-repeat;
-}
-
-textarea:focus,input:not(input[type="radio"],input[type="file"]):focus {
 	background-color: #10b3f4;
+} 
+textarea:hover,input:not(input[type="radio"],input[type="file"]):hover { background-color: #a9dff4 }
+textarea:focus,input:not(input[type="radio"],input[type="file"]):focus {
+	background-color: #a9dff4;
 	border-radius: 0px;
 	border-bottom: 2px solid black;
 }
-textarea:hover,input:not(input[type="radio"],input[type="file"]):hover {
-	background-color: #10b3f4;
+textarea { resize: vertical } textarea:placeholder { padding: 5px }
+input[type="date"] { padding: 0.5em; font-size: 1.2em }
+input[type="date"],input[type="number"] { width: auto; display: inline }
+input[type="range"] { cursor: crosshair }
+input[type="number"].money { 
+	background-image: url("../image/dollarSign.png");
+	padding-left: 30px; background-size: 20px;
+	background-position: 10px; background-repeat: no-repeat;
 }
 @font-face { font-family: fancySignature;	src: url("MonsieurLaDoulaise-Regular.ttf") }
 input[type="text"].fancySignature { font-family: fancySignature; font-size: 2rem; font-weight: bold; padding: 5px }
 button#submitButton {
 	width: 100px; height: 50px;
-	margin: 1%;	padding-left: 0; padding-right: 0;
+	margin: 20px;	padding-left: 0; padding-right: 0; float: right;
 	text-align: center;	color: white; letter-spacing: 1px; font-size: 1em;
 	border-radius: 4px; border: none;
-	cursor: pointer;
+	cursor: pointer; background-color: green;
 }
-
-#slideContainer > div.slide {
-	width: 0; display: none; opacity: 0;
-	transition: all .5s linear 0s;
-	float: right;
-}
-.buttonContainer { position:relative; width:100%; margin: 30px 0 10px 0; text-align: center }
-.buttonContainer > button { 
-	width: min(18%,100px); height: 50px; margin: 1%; 
-	padding-left: 0; padding-right: 0;
-	text-align: center; color: white;
-}
-.buttonContainer > img {
-	border: none; display: block;
-	width: 50px; aspect-ratio: 1/1;
-	cursor: pointer;
-	margin: 5px;
-}
-.buttonContainer select { height: 100%; margin: 1% }
-.buttonContainer span br { display: none }
-.buttonContainer span { text-align: center }
-
-#editRibbon {
-	background-image: linear-gradient(30deg, #b4a7a7, #fbefef);
-	width: 100%; height: 40px;
-	border: 1px solid black; border-radius: 8px;
-	margin: 5px 0px 10px 0px;
-	position: sticky; top: 65px;
-}
-.ribbonOption {
-	background-color: transparent; float: left; height: 30px; width: 40px; 
-	margin: 4px 0px 0px 2px; padding: 1px 5px 1px 5px;
-	font-size: 1.6em; color: black; font-family: "Times New Roman";
-	border-style: none solid none none; border-width: 2px; border-color: black; border-radius: 5px 0 0 5px;
-} .ribbonOption:hover {background-color: #ffffff}
-div.dropdown {
-	float: left;
-}
-div.dropdown > div.dropdownContents {
-  position: absolute; float: left;
-	margin-top: 35px; height: 40px;
-  background-image: linear-gradient(30deg, #b4a7a7, #fbefef);
-	border: 1px solid black; border-radius: 8px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-div.itemContainer {	width: 100%} 
-div.itemContainer:hover { border: 1px dashed black }
-div.focusOptions {
-	height: 40px; width: 100%;
-	margin: 0px; padding: 0px;
-	display: none;
-}
-button.movementUp, button.movementDown {
-	height: 100%; aspect-ratio: 1/1;
-	margin: 0px; padding: 0px; float: left;
-	background-color: white;
-	border: 1px solid #9e9e9e; border-radius: 50px;
-}
-img.deleteContainer {
-	float: right;
-	width: 40px; aspect-ratio: 1/1;
-	cursor: pointer;
-	margin: 0px; padding: 0px;
-}
-img.focusOptions {
-	width: 100%;
-	margin: 0px; padding: 0px;
-}
-
-span.bold {font-weight:bold}
-span.italic {font-style:italic}
-span.underline {text-decoration: underline}
-img.icon {margin: auto; display: block; height: 100%}
-
-.invalid { color: red; font-weight: bold }
-
-input:autofill { border: 4px solid #10b3f4 }
-
-ul.noPoints {	list-style: none }
-iframe.pdf { width: 90%;	height: 80vh;	margin-top: 5vh }
-.hidden {	display: none }
-
-div.popup {
-	position: fixed; z-index: 10;
-	height: 80vh;	width: 80vw;
-	background-color: #ffffff;
-	top:10vh;	left: 10vw; 
-	border: 2px solid black;
-}
-div.popup > div.popupHeader {
-	height: 10%; width: 100%;
-	text-align: center;
-}
-button.closePopup {
-	width: 30px; aspect-ratio: 1/1;
-	float:right; top: 10px; right: 15px;
-	font-weight: bold; text-align: center; color: black;
-	border-radius: 50px;
-	padding: 0px; margin: 0px;
-	background-color: #c5c4c4;
-}
-div.popup button.upload {
-	margin: 5px; height: 95%; 
-	color: white; background-color: blue;
-	float: left; text-align: center;
-}
-div.popupMain {
-	width:100%;	height: 85%;
-	overflow-y: scroll; text-align: center;
-}
-img.popupThumbnail {
-	width: 24%; aspect-ratio: 1/1;
-	margin: 2px;
-	float: left;
-	cursor: pointer;
-	border: 1px solid black;
-	object-fit: contain;
-} img.popupThumbnail:hover { border: 5px solid black }
-
-.forceProgress { cursor: progress }
-.forceProgress * { cursor: inherit !important }
-
 @media only screen and (max-width: 600px) {
 	div.split { width:100% }
 	img.popupThumbnail { margin: 0 }

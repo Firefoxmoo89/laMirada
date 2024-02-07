@@ -1,5 +1,5 @@
 var http = require('http'); var url = require("url"); var fs = require("fs"); var rad = require("./radicalModule.js");
-console.log("Go to http://localhost:3000")  
+console.log("Go to http://localhost")  
 
 http.createServer((request, response) => { // request is object
   
@@ -33,9 +33,9 @@ http.createServer((request, response) => { // request is object
     }
   }
   else if (deets.pathname.includes("/style")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/css"},response) }
-  else if (deets.pathname.includes("script")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/javascript"},response) }
-  else if (deets.pathname.includes("image")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"image/png"},response) }
+  else if (deets.pathname.includes("/script")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/javascript"},response) }
+  else if (deets.pathname.includes("/image")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"image/png"},response) }
   else {
     rad.serveFile("template/missing.html",404,{"Content-type":"text/html"},response);
   }
-}).listen(3000);
+}).listen(80);

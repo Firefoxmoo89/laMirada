@@ -1,200 +1,193 @@
 <script>document.title += " - Apply"</script>
 
-<div id="slideContainer" style="height:10vh">
-  <div class="slide" style="display: block; opacity: 1; width: 100%;" data-current="true">
-    <h2 class="articleTitle">Application Criteria and Process</h2>
-    <p>Each adult must complete a separate application, submit a photo ID (from any country or state) & provide proof of income (i.e. pay stubs, bank statements, employment letters, tax returns). A co-signer or higher deposit may be if the applicant has insufficient landlord, credit or income references. We will not discriminate due to race, ethnicity, family/ marital status, age, disability, source of income, or religious/ sexual beliefs. Until execution & delivery of lease agreement to applicant, we reserve the right to reject or deny this application for any reason, such as: Application is unsigned, incomplete, or contains fraudulent/ misleading informtion; low wage-to-rent ratio; collections, liens, judgments, or bankruptcy; poor rental references; recent evictions; unstable or unverifiable income; pattern of criminal behavior or abusive attitude. Approved applicants will have 2 hrs from notification to sign a rental agreement & pay full deposit, or we will proceed with the next qualified applicant. Applicant has no rights to the property until a rental agreement is signed by both parties & the account charges are fully paid.</p> 
-    <div><input required type="checkbox" id="agreeProcess" name="agreeProcess" class="singular"><label for="agreeProcess">I have read and agree to the terms and conditions above</label></div>
-  </div><div class="slide">	
-    <h2 class="articleTitle">Applicant's Information</h2>
-      <label for="firstName">First Name:
-      <input required type="text" id="firstName" name="firstName" placeholder="John">
-    </label><label for="lastName">Last Name:
-      <input required type="text" id="lastName" name="lastName" placeholder="Doe">
-    </label><label for="phoneNumber">Phone Number:
-      <input required type="tel" id="phoneNumber" name="phoneNumber" placeholder="(555) 555-5555">
-    </label><label for="emailAddress">Email:
-      <input required type="email" id="emailAddress" name="emailAddress" placeholder="example@email.com">
-    </label><label for="id">Provide a copy of ID
-      <input required type="file" accept="image/*" id="id" name="id" multiple>
-    </label>
-  </div><div class="slide">	
-    <label for="otherAdults">Names of Other Adults:
-      <input required type="text" id="otherAdults" name="otherAdults" placeholder="Jane Doe">
-    </label><label for="numOfKids">Number of Children:
-      <input required type="number" id="numOfKids" name="numOfKids">
-    </label><label for="numOfPets">Number of Pets:
-      <input required type="number" id="numOfPets" name="numOfPets">
-    </label><label for="petType">Pet Type(s):
-      <input required type="text" id="petType" name="petType">
-    </label><label for="numOfDruggies">How many occupants smoke cigaretts or marijuana?
-      <input required type="number" id="numOfDruggies" name="numOfDruggies">
-    </label>
-  </div><div class="slide">	
-    <label for="tenantScale">On a scale of 1-10, how are you as a tenant?
-      <input required type="range" id="tenantScale" name="tenantScale" min="0" max="10" style="margin-right: 20px">
-      <span id="tenantScaleDisplay">5</span>
-    </label><label for="savedAmount">How much do you have saved for move-in costs?
-      <input required type="number" id="savedAmount" name="savedAmount" class="money">
-    </label><label for="hearAboutUs">How did you hear about us?
-      <textarea id="hearAboutUs" name="hearAboutUs" spellcheck="true"></textarea>
-    </label><label for="moveDate">Desired Move-in Date:
-      <input required type="date" id="moveDate" name="moveDate">
-  </div><div class="slide">
-    <h2 class="articleTitle">Applicant's Rental History</h2>
-    <h3 class="articleTitle">Most Recent Rental<br><span style="font-size:.9rem">(Use parents home if necessary)</span></h3>
-      <label for="currentAddress">Address:
-        <input required type="text" id="currentAddress" name="currentAddress">
-      </label><label for="currentMovedIn">Date Moved In:
-        <input required type="date" id="currentMovedIn" name="currentMovedIn">
-      </label><label for="currentMovedOut">Date Moved Out:
-        <input type="date" id="currentMovedOut" name="currentMovedOut">
-      </label><label for="currentMonthlyRent">Current Monthly Rent:
-        <input required type="number" id="currentMonthlyRent" name="currentMonthlyRent" class="money">
-      </label><label for="currentLandlord">Landlord Name:
-        <input required type="text" id="currentLandlord" name="currentLandlord">
-      </label><label for="currentLandlordPhone">Landlord Phone:
-        <input required type="tel" id="currentLandlordPhone" name="currentLandlordPhone">
-      </label><label for="currentLeave">Reason for Leaving:
-        <textarea required id="currentLeave" name="currentLeave"></textarea>
-      </label><label for="rentalStatement">Current Rental Statement (If possible, please provide):
-        <input type="file" accept="image/*" id="rentalStatement" name="rentalStatement" multiple>
-      </label><div class="label">
-        <input type="checkbox" id="extraRental" name="extraRental" class="singular" data-submitform="ignore" onchange="toggleDisplay('div#priorRental')"><label for="extraRental">Add Second Rental (please fill if applicable)</label>
-      </div>
-    <div id="priorRental" style="display:none"><h3 class="articleTitle">Prior Rental</h3>
-      <label for="priorAddress">Address:
-        <input type="text" id="priorAddress" name="priorAddress">
-      </label><label for="priorMovedIn">Date Moved In:
-        <input type="date" id="priorMovedIn" name="priorMovedIn">
-      </label><label for="priorMovedOut">Date Moved Out:
-        <input type="date" id="priorMovedOut" name="priorMovedOut">
-      </label><label for="priorMonthlyRent">Current Monthly Rent:
-        <input type="number" id="priorMonthlyRent" name="priorMonthlyRent" class="money">
-      </label><label for="priorLandlord">Landlord Name:
-        <input type="text" id="priorLandlord" name="priorLandlord">
-      </label><label for="priorLandlordPhone">Landlord Phone:
-        <input type="tel" id="priorLandlordPhone" name="priorLandlordPhone">
-      </label><label for="priorLeave">Reason for Leaving:
-        <textarea id="priorLeave" name="priorLeave"></textarea>
-      </label>
+<section><div>
+  <h1 class="articleTitle">Application Criteria and Process</h1>
+  <p>Each adult must complete a separate application, submit a photo ID (from any country or state) & provide proof of income (i.e. pay stubs, bank statements, employment letters, tax returns). A co-signer or higher deposit may be if the applicant has insufficient landlord, credit or income references. We will not discriminate due to race, ethnicity, family/ marital status, age, disability, source of income, or religious/ sexual beliefs. Until execution & delivery of lease agreement to applicant, we reserve the right to reject or deny this application for any reason, such as: Application is unsigned, incomplete, or contains fraudulent/ misleading informtion; low wage-to-rent ratio; collections, liens, judgments, or bankruptcy; poor rental references; recent evictions; unstable or unverifiable income; pattern of criminal behavior or abusive attitude. Approved applicants will have 2 hrs from notification to sign a rental agreement & pay full deposit, or we will proceed with the next qualified applicant. Applicant has no rights to the property until a rental agreement is signed by both parties & the account charges are fully paid.</p> 
+  <div><input required type="checkbox" id="agreeProcess" name="agreeProcess" class="simple"><label for="agreeProcess">I have read and agree to the terms and conditions above</label></div>
+</div></section><section class="colored"><div>	
+  <h1 class="articleTitle">Applicant's Information</h1>
+    <label for="firstName">First Name:
+    <input required type="text" id="firstName" name="firstName" placeholder="John">
+  </label><label for="lastName">Last Name:
+    <input required type="text" id="lastName" name="lastName" placeholder="Doe">
+  </label><label for="phoneNumber">Phone Number:
+    <input required type="tel" id="phoneNumber" name="phoneNumber" placeholder="(555) 555-5555">
+  </label><label for="emailAddress">Email:
+    <input required type="email" id="emailAddress" name="emailAddress" placeholder="example@email.com">
+  </label><label for="id">Provide a copy of ID
+    <input required type="file" accept="image/*" id="id" name="id" multiple>
+  </label>
+</div></section><section><div>	
+  <label for="otherAdults">Names of Other Adults:
+    <input required type="text" id="otherAdults" name="otherAdults" placeholder="Jane Doe">
+  </label><label for="numOfKids">Number of Children:
+    <input required type="number" id="numOfKids" name="numOfKids">
+  </label><label for="numOfPets">Number of Pets:
+    <input required type="number" id="numOfPets" name="numOfPets">
+  </label><label for="petType">Pet Type(s):
+    <input required type="text" id="petType" name="petType">
+  </label><label for="numOfDruggies">How many occupants smoke cigaretts or marijuana?
+    <input required type="number" id="numOfDruggies" name="numOfDruggies">
+  </label>
+</div></section><section class="colored"><div>	
+  <label for="tenantScale">On a scale of 1-10, how are you as a tenant?
+    <input required type="range" id="tenantScale" name="tenantScale" min="0" max="10" style="margin-right: 20px">
+    <span id="tenantScaleDisplay">5</span>
+  </label><label for="savedAmount">How much do you have saved for move-in costs?
+    <input required type="number" id="savedAmount" name="savedAmount" class="money">
+  </label><label for="hearAboutUs">How did you hear about us?
+    <textarea id="hearAboutUs" name="hearAboutUs" spellcheck="true"></textarea>
+  </label><label for="moveDate">Desired Move-in Date:
+    <input required type="date" id="moveDate" name="moveDate">
+</div></section><section><div>	
+  <h1 class="articleTitle">Applicant's Rental History</h1>
+  <h3 class="articleTitle">Most Recent Rental<br><span style="font-size:.9rem">(Use parents home if necessary)</span></h3>
+    <label for="currentAddress">Address:
+      <input required type="text" id="currentAddress" name="currentAddress">
+    </label><label for="currentMovedIn">Date Moved In:
+      <input required type="date" id="currentMovedIn" name="currentMovedIn">
+    </label><label for="currentMovedOut">Date Moved Out:
+      <input type="date" id="currentMovedOut" name="currentMovedOut">
+    </label><label for="currentMonthlyRent">Current Monthly Rent:
+      <input required type="number" id="currentMonthlyRent" name="currentMonthlyRent" class="money">
+    </label><label for="currentLandlord">Landlord Name:
+      <input required type="text" id="currentLandlord" name="currentLandlord">
+    </label><label for="currentLandlordPhone">Landlord Phone:
+      <input required type="tel" id="currentLandlordPhone" name="currentLandlordPhone">
+    </label><label for="currentLeave">Reason for Leaving:
+      <textarea required id="currentLeave" name="currentLeave"></textarea>
+    </label><label for="rentalStatement">Current Rental Statement (If possible, please provide):
+      <input type="file" accept="image/*" id="rentalStatement" name="rentalStatement" multiple>
+    </label><div class="label">
+      <input type="checkbox" id="extraRental" name="extraRental" class="simple" data-submitform="ignore" onchange="toggleDisplay('div#priorRental')"><label for="extraRental">Add Second Rental (please fill if applicable)</label>
     </div>
-  </div><div class="slide">
-  <h2 class="articleTitle">Applicant's Income History</h2>
-    <h3 class="articleTitle">Income 1</h3>
-      <label for="companyName">Employer/Company Name:
-        <input required type="text" id="companyName" name="companyName">
-      </label><label for="occupation">Occupation/Industry:
-        <input required type="text" id="occupation" name="occupation">
-      </label><label for="jobLocation">City, State
-        <input required type="text" id="jobLocation" name="jobLocation">
-      </label><label for="position">Position:
-        <input required type="text" id="position" name="position">
-      </label><label for="supervisorName">Supervisor Name:
-        <input required type="text" id="supervisorName" name="supervisorName">
-      </label><label for="supervisorPhone">Supervisor Phone
-        <input required type="tel" id="supervisorPhone" name="supervisorPhone">
-      </label><label for="schedule">Hours worked per Week
-        <input required type="number" id="schedule" name="schedule">
-      </label><label for="startDate">Start Date:
-        <input required type="date" id="startDate" name="startDate">
-      </label><label for="endDate">End Date:
-        <input required type="date" id="endDate" name="endDate">
-      </label><label for="monthlySalary">Monthly Salary:
-        <input required type="number" id="monthlySalary" name="monthlySalary" class="money">
-      </label><label for="rentalStatement">Proof of Income (ex. w2, pay stubs, etc):
-        <input required type="file" accept="image/*" id="incomeStatement" name="incomeStatement" multiple>
-      </label><div class="label">
-        <input type="checkbox" id="extraIncome" name="extraIncome" class="singular" data-submitform="ignore" onchange="toggleDisplay('div#otherIncome')"><label for="extraIncome">Add Second Income (please fill if applicable)</label>
-      </div>
-    <div id="otherIncome" style="display:none"><h3 class="articleTitle">Income 2</h3>
-      <label for="companyName1">Employer/Company Name:
-        <input type="text" id="companyName1" name="companyName1">
-      </label><label for="occupation1">Occupation/Industry:
-        <input type="text" id="occupation1" name="occupation1">
-      </label><label for="jobLocation1">City, State
-        <input type="text" id="jobLocation1" name="jobLocation1">
-      </label><label for="position1">Position:
-        <input type="text" id="position1" name="position1">
-      </label><label for="supervisorName1">Supervisor Name:
-        <input type="text" id="supervisorName1" name="supervisorName1">
-      </label><label for="supervisorPhone1">Supervisor Phone:
-        <input type="tel" id="supervisorPhone1" name="supervisorPhone1">
-      </label><label for="schedule1">Hours worked per Week
-        <input type="number" id="schedule1" name="schedule1">
-      </label><label for="startDate1">Start Date:
-        <input type="date" id="startDate1" name="startDate1">
-      </label><label for="endDate1">End Date:
-        <input type="date" id="endDate1" name="endDate1">
-      </label><label for="monthlySalary1">Monthly Salary:
-        <input type="number" id="monthlySalary1" name="monthlySalary1" class="money">
-      </label>
-    </div>
-  </div><div class="slide">
-    <label for="otherIncome">Other Income:
-      <input required type="text" id="otherIncome" name="otherIncome">
-    </label><label for="otherIncomeAmount">Other Monthly Income Amount
-      <input required type="number" id="otherIncomeAmount" name="otherIncomeAmount" class="money">
-    </label><p>Total Current Monthly Income from All Income Sources: <span style="font-size:1.5em;font-weight:bold">$<span id="totalIncome"></span></span></p>
-  </div><div class="slide">
-    <h2>Other Information</h2>
-    <label for="parking">How many parking spaces do you need?
-      <input required type="number" id="parking" name="parking">
-    </label><div class="label">Do you work nights or odd hours?
-      <input required type="radio" id="oddHoursTrue" name="oddHours" value="Yes"><label for="oddHoursTrue" class="inline">Yes</label>
-      <input required type="radio" id="oddHoursFalse" name="oddHours" value="No"><label for="oddHoursFalse" class="inline">No</label>
-    </div><div class="label">Do you have frequent overnight guests?
-      <input required type="radio" id="overnightGuestsTrue" name="overnightGuests" value="Yes"><label for="overnightGuestsTrue" class="inline">Yes</label>
-      <input required type="radio" id="overnightGuestsFalse" name="overnightGuests" value="No"><label for="overnightGuestsFalse" class="inline">No</label>
-    </div><div class="label">Do you have issues with community rules?
-      <input required type="radio" id="againstRulesTrue" name="againstRules" value="Yes"><label for="againstRulesTrue" class="inline">Yes</label>
-      <input required type="radio" id="againstRulesFalse" name="againstRules" value="No"><label for="againstRulesFalse" class="inline">No</label>
-    </div><label for="lateBills">In the last three years, how often did you pay bills late?
-      <input required type="text" id="lateBills" name="lateBills">
-    </label><div class="label">Have you ever been evicted or asked to move out?
-      <input required type="radio" id="evictedTrue" name="evicted" value="Yes"><label for="evictedTrue" class="inline">Yes</label>
-      <input required type="radio" id="evictedFalse" name="evicted" value="No"><label for="evictedFalse" class="inline">No</label>
-    </div><div class="label">Have you ever been sued for bills or been in collections
-      <input required type="radio" id="suedTrue" name="sued" value="Yes"><label for="suedTrue" class="inline">Yes</label>
-      <input required type="radio" id="suedFalse" name="sued" value="No"><label for="suedFalse" class="inline">No</label>
-    </div><div class="label">Have you informed your current landlord that you are moving?
-      <input required type="radio" id="informedLandlordTrue" name="informedLandlord" value="Yes"><label for="informedLandlordTrue" class="inline">Yes</label>
-      <input required type="radio" id="informedLandlordFalse" name="informedLandlord" value="No"><label for="informedLandlordFalse" class="inline">No</label>
-    </div>
-  </div><div class="slide">
-    <h2 class="articleTitle">Applicants Emergency Contacts and Personal References</h2>
-    <h3 class="articleTitle">Person 1</h3>
-      <label for="person1Name">Name:
-        <input required type="text" id="person1Name" name="person1Name">
-      </label><label for="person1Phone">Phone:
-        <input required type="tel" id="person1Phone" name="person1Phone">
-      </label><label for="person1Relationship">Relationship:
-        <input required type="text" id="person1Relationship" name="person1Relationship">
-      </label>
-    <h3 class="articleTitle">Person 2</h3>
-      <label for="person2Name">Name:
-        <input required type="text" id="person2Name" name="person2Name">
-      </label><label for="person2Phone">Phone:
-        <input required type="tel" id="person2Phone" name="person2Phone">
-      </label><label for="person2Relationship">Relationship:
-        <input required type="text" id="person2Relationship" name="person2Relationship">
-      </label>
-  </div><div class="slide">
-    <h2 class="articleTitle">Authorization of Screening</h2>
-    <p>I, the undersigned, hereby declare that the above information is true and correct, and has been made for the purpose of applying for residency. I acknowledges that false or omitted information may constitute as grounds for rejection of this application, termination of occupancy, and/or forfeiture of fees or deposits & may constitute as a criminal offense under the laws of this state. I do hereby authorize a full consumer and characture investigation to evaluate my tenancy, including but not limited to contacting past and present landlords, employers, creditors, credit bureaus, public records, & any other sources deemed necessary. I authorize said parties the release of information requested, & relinquish/ hold harmless all parites for any & all damages or liabilities which might result through obtaining/ providing said information. In addition, I do hereby declare that a photocopy or pdf email of this document shall be as valid as the original, and will suffice as an authorized signature to release information on all my financial accounts related to this transaction. This investigation is for resident screening purposes only, and will remain private, secure, & confidential for all parties involved.</p>
-    <div><input required type="checkbox" id="signAgreement" name="signAgreement" class="singular"><label for="signAgreement">I have read and agree to the terms and conditions above</label></div>
-    <label for="signature">Sign Name:
-      <input required type="text" id="signature" name="signature" class="fancySignature">
-    </label><label for="signDate">Date:
-      <input required type="date" id="signDate" name="signDate">
+  <div id="priorRental" style="display:none"><h3 class="articleTitle">Prior Rental</h3>
+    <label for="priorAddress">Address:
+      <input type="text" id="priorAddress" name="priorAddress">
+    </label><label for="priorMovedIn">Date Moved In:
+      <input type="date" id="priorMovedIn" name="priorMovedIn">
+    </label><label for="priorMovedOut">Date Moved Out:
+      <input type="date" id="priorMovedOut" name="priorMovedOut">
+    </label><label for="priorMonthlyRent">Current Monthly Rent:
+      <input type="number" id="priorMonthlyRent" name="priorMonthlyRent" class="money">
+    </label><label for="priorLandlord">Landlord Name:
+      <input type="text" id="priorLandlord" name="priorLandlord">
+    </label><label for="priorLandlordPhone">Landlord Phone:
+      <input type="tel" id="priorLandlordPhone" name="priorLandlordPhone">
+    </label><label for="priorLeave">Reason for Leaving:
+      <textarea id="priorLeave" name="priorLeave"></textarea>
     </label>
   </div>
-</div>
-<div class="buttonContainer">
-  <button type="button" id="backButton" style="float:left;visibility:hidden;background-color:red">Back</button>
-  <select id="slideSelect" data-submitform="ignore" style="float:left"></select><span style="float:left;margin-top:20px"></span>
-  <button type="button" id="nextButton" style="float:right;background-color:red">Next</button>
-  <button type="button" id="submitButton" style="float:right;visibility:hidden;background-color:green">Submit</button>
+</div></section><section class="colored"><div>	
+  <h1 class="articleTitle">Applicant's Income History</h1>
+  <h3 class="articleTitle">Income 1</h3>
+    <label for="companyName">Employer/Company Name:
+      <input required type="text" id="companyName" name="companyName">
+    </label><label for="occupation">Occupation/Industry:
+      <input required type="text" id="occupation" name="occupation">
+    </label><label for="jobLocation">City, State
+      <input required type="text" id="jobLocation" name="jobLocation">
+    </label><label for="position">Position:
+      <input required type="text" id="position" name="position">
+    </label><label for="supervisorName">Supervisor Name:
+      <input required type="text" id="supervisorName" name="supervisorName">
+    </label><label for="supervisorPhone">Supervisor Phone
+      <input required type="tel" id="supervisorPhone" name="supervisorPhone">
+    </label><label for="schedule">Hours worked per Week
+      <input required type="number" id="schedule" name="schedule">
+    </label><label for="startDate">Start Date:
+      <input required type="date" id="startDate" name="startDate">
+    </label><label for="endDate">End Date:
+      <input required type="date" id="endDate" name="endDate">
+    </label><label for="monthlySalary">Monthly Salary:
+      <input required type="number" id="monthlySalary" name="monthlySalary" class="money">
+    </label><label for="rentalStatement">Proof of Income (ex. w2, pay stubs, etc):
+      <input required type="file" accept="image/*" id="incomeStatement" name="incomeStatement" multiple>
+    </label><div class="label">
+      <input type="checkbox" id="extraIncome" name="extraIncome" class="simple" data-submitform="ignore" onchange="toggleDisplay('div#otherIncome')"><label for="extraIncome">Add Second Income (please fill if applicable)</label>
+    </div>
+  <div id="otherIncome" style="display:none"><h3 class="articleTitle">Income 2</h3>
+    <label for="companyName1">Employer/Company Name:
+      <input type="text" id="companyName1" name="companyName1">
+    </label><label for="occupation1">Occupation/Industry:
+      <input type="text" id="occupation1" name="occupation1">
+    </label><label for="jobLocation1">City, State
+      <input type="text" id="jobLocation1" name="jobLocation1">
+    </label><label for="position1">Position:
+      <input type="text" id="position1" name="position1">
+    </label><label for="supervisorName1">Supervisor Name:
+      <input type="text" id="supervisorName1" name="supervisorName1">
+    </label><label for="supervisorPhone1">Supervisor Phone:
+      <input type="tel" id="supervisorPhone1" name="supervisorPhone1">
+    </label><label for="schedule1">Hours worked per Week
+      <input type="number" id="schedule1" name="schedule1">
+    </label><label for="startDate1">Start Date:
+      <input type="date" id="startDate1" name="startDate1">
+    </label><label for="endDate1">End Date:
+      <input type="date" id="endDate1" name="endDate1">
+    </label><label for="monthlySalary1">Monthly Salary:
+      <input type="number" id="monthlySalary1" name="monthlySalary1" class="money">
+    </label>
+  </div>
+</div></section><section><div>	
+  <label for="otherIncome">Other Income:
+    <input required type="text" id="otherIncome" name="otherIncome">
+  </label><label for="otherIncomeAmount">Other Monthly Income Amount
+    <input required type="number" id="otherIncomeAmount" name="otherIncomeAmount" class="money">
+  </label><p>Total Current Monthly Income from All Income Sources: <span style="font-size:1.5em;font-weight:bold">$<span id="totalIncome"></span></span></p>
+</div></section><section class="colored"><div>	
+  <h1>Other Information</h1>
+  <label for="parking">How many parking spaces do you need?
+    <input required type="number" id="parking" name="parking">
+  </label><div class="label">Do you work nights or odd hours?
+    <input required type="radio" id="oddHoursTrue" name="oddHours" value="Yes"><label for="oddHoursTrue" class="inline">Yes</label>
+    <input required type="radio" id="oddHoursFalse" name="oddHours" value="No"><label for="oddHoursFalse" class="inline">No</label>
+  </div><div class="label">Do you have frequent overnight guests?
+    <input required type="radio" id="overnightGuestsTrue" name="overnightGuests" value="Yes"><label for="overnightGuestsTrue" class="inline">Yes</label>
+    <input required type="radio" id="overnightGuestsFalse" name="overnightGuests" value="No"><label for="overnightGuestsFalse" class="inline">No</label>
+  </div><div class="label">Do you have issues with community rules?
+    <input required type="radio" id="againstRulesTrue" name="againstRules" value="Yes"><label for="againstRulesTrue" class="inline">Yes</label>
+    <input required type="radio" id="againstRulesFalse" name="againstRules" value="No"><label for="againstRulesFalse" class="inline">No</label>
+  </div><label for="lateBills">In the last three years, how often did you pay bills late?
+    <input required type="text" id="lateBills" name="lateBills">
+  </label><div class="label">Have you ever been evicted or asked to move out?
+    <input required type="radio" id="evictedTrue" name="evicted" value="Yes"><label for="evictedTrue" class="inline">Yes</label>
+    <input required type="radio" id="evictedFalse" name="evicted" value="No"><label for="evictedFalse" class="inline">No</label>
+  </div><div class="label">Have you ever been sued for bills or been in collections
+    <input required type="radio" id="suedTrue" name="sued" value="Yes"><label for="suedTrue" class="inline">Yes</label>
+    <input required type="radio" id="suedFalse" name="sued" value="No"><label for="suedFalse" class="inline">No</label>
+  </div><div class="label">Have you informed your current landlord that you are moving?
+    <input required type="radio" id="informedLandlordTrue" name="informedLandlord" value="Yes"><label for="informedLandlordTrue" class="inline">Yes</label>
+    <input required type="radio" id="informedLandlordFalse" name="informedLandlord" value="No"><label for="informedLandlordFalse" class="inline">No</label>
+  </div>
+</div></section><section><div>	
+  <h1 class="articleTitle">Applicants Emergency Contacts and Personal References</h1>
+  <h3 class="articleTitle">Person 1</h3>
+    <label for="person1Name">Name:
+      <input required type="text" id="person1Name" name="person1Name">
+    </label><label for="person1Phone">Phone:
+      <input required type="tel" id="person1Phone" name="person1Phone">
+    </label><label for="person1Relationship">Relationship:
+      <input required type="text" id="person1Relationship" name="person1Relationship">
+    </label>
+  <h3 class="articleTitle">Person 2</h3>
+    <label for="person2Name">Name:
+      <input required type="text" id="person2Name" name="person2Name">
+    </label><label for="person2Phone">Phone:
+      <input required type="tel" id="person2Phone" name="person2Phone">
+    </label><label for="person2Relationship">Relationship:
+      <input required type="text" id="person2Relationship" name="person2Relationship">
+    </label>
+</div></section><section class="colored"><div>	
+  <h1 class="articleTitle">Authorization of Screening</h1>
+  <p>I, the undersigned, hereby declare that the above information is true and correct, and has been made for the purpose of applying for residency. I acknowledges that false or omitted information may constitute as grounds for rejection of this application, termination of occupancy, and/or forfeiture of fees or deposits & may constitute as a criminal offense under the laws of this state. I do hereby authorize a full consumer and characture investigation to evaluate my tenancy, including but not limited to contacting past and present landlords, employers, creditors, credit bureaus, public records, & any other sources deemed necessary. I authorize said parties the release of information requested, & relinquish/ hold harmless all parites for any & all damages or liabilities which might result through obtaining/ providing said information. In addition, I do hereby declare that a photocopy or pdf email of this document shall be as valid as the original, and will suffice as an authorized signature to release information on all my financial accounts related to this transaction. This investigation is for resident screening purposes only, and will remain private, secure, & confidential for all parties involved.</p>
+  <div><input required type="checkbox" id="signAgreement" name="signAgreement" class="simple"><label for="signAgreement">I have read and agree to the terms and conditions above</label></div>
+  <label for="signature">Sign Name:
+    <input required type="text" id="signature" name="signature" class="fancySignature">
+  </label><label for="signDate">Date:
+    <input required type="date" id="signDate" name="signDate">
+  </label>
+  <button type="button" id="submitButton">Submit</button>
 </div>
 
 </div> <!--main-->
