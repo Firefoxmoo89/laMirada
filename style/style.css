@@ -109,9 +109,5 @@ button#submitButton {
 	cursor: pointer; background-color: green;
 }
 @media only screen and (max-width: 600px) {
-	div.split { width:100% }
-	img.popupThumbnail { margin: 0 }
-	.buttonContainer select { padding: 0 }
-	.buttonContainer span { padding: 0 }
-	.buttonContainer span br { display: inline }
+
 }
