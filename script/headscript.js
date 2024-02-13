@@ -17,20 +17,6 @@ async function fetchadids(source, options, daFunction) {
 	.then(data => { daFunction(data) })
 }
 
-function hide(selector,all=false,parent=document) {
-	if (all) {
-		elementList = parent.querySelectorAll(selector);
-		for (i=0;i<elementList.length;i++) { elementList[i].style.display = "none" }
-	} else { parent.querySelector(selector).style.display = "none" }
-}
-
-function reveal(selector,all=false,parent=document) {
-	if (all) {
-		elementList = parent.querySelectorAll(selector);
-		for (i=0;i<elementList.length;i++) { elementList[i].style.display = "block" }
-	} else { parent.querySelector(selector).style.display = "block" }
-}
-
 function mark(daInput,display="inline") {
 	invalidSpan = document.createElement("span"); invalidSpan.innerHTML = "*Required";
 	invalidSpan.setAttribute("class","invalid"); invalidSpan.style.display = display;
@@ -64,14 +50,6 @@ function submitForm(source, daFunction, selectors="input:not([data-submitform='i
 		}	else { daFormData.append(daInput.name,daInput.value) }																
 	}
 	fetchadids(source, { method: "POST", body: daFormData }, daFunction);
-}
-
-function toggleDisplay(selector,display1="none",display2="block") {
-	let daList = document.querySelectorAll(selector); let i;
-	for (i=0;i<daList.length;i++) { daElement = daList[i];
-		if (daElement.style.display == display1) { daElement.style.display = display2 }
-		else if (daElement.style.display == display2) { daElement.style.display = display1 }
-	}
 }
 
 function listenerValidate(selectors="input,select,textarea",daParent=document,display="block") {
