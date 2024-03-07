@@ -19,3 +19,9 @@ for (i=0;i<telInputList.length;i++) {
 	});
 }
 
+document.querySelector("button#mobileNav").addEventListener("click", () => { 
+	nav = document.querySelector("nav"); 
+	if (nav.style.display == "none") { nav.style.display = "flex" }
+	else { nav.style.display = "none" }
+});
+
