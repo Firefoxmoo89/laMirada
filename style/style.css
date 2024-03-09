@@ -9,8 +9,11 @@ header {
 	display: flex; flex-direction: row; align-items: center;
 	width: 100%; height: 60px;
 	padding: 5px 10px;
-	background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px);
 	box-shadow: 0 2px 3px rgba(0,0,0,.3);
+} header::before {
+	content: '';
+  position: absolute; z-index: -1; inset: 0;
+	background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px);
 }
 img#banner { height: 100% } a:has(> img#banner) { display: block; height: 100%; }
 @keyframes navHover {	0% { background-color: none }	100% { background-color: #ececec } }
@@ -109,22 +112,22 @@ button#submitButton {
 	cursor: pointer; background-color: green;
 }
 @media only screen and (width <= 768px) {
+	.desktop { display: none }
 	button#mobileNav { 
 		display: block; 
 		margin-left: auto; margin-right: 20px; padding: 0;
 		height: 30px; width: 30px;
 		border: none; outline: none;
 		background-color: transparent;
-	} button#mobileNav:hover { background-color: #fff }
+	} button#mobileNav:hover { animation: footerHover .2s linear; animation-fill-mode: forwards }
 	button#mobileNav > img { height: 100% }
 	nav {	
 		display: none; flex-direction: column; align-items: center; justify-content: flex-start;
 		position: fixed; right: 0; top: 60px;
-		width: 50vw;
-		padding: 20px; margin: 0;
-		background-color: #fff; 
+		padding: 20px;
+		background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px);
 		box-shadow: -2px 2px 3px rgba(0,0,0,.3);
-	}
+	} 
 	nav > a, nav > a:visited, nav > a#navApply {
 		text-decoration: none; color: #414042; font-weight: 550;
 		border-radius: 4px;
