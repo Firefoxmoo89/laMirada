@@ -41,18 +41,18 @@ function validateInputs(parentElement=document,display="inline",selectors="input
 }
 
 function submitForm(source, daFunction, selectors="input:not([data-submitform='ignore']),textarea:not([data-submitform='ignore']),select:not([data-submitform='ignore'])", daParent=document) {
-	daFormData = new FormData(); var i;
-	inputList = daParent.querySelectorAll(selectors); finishedOptions = [];
-	for (i=0;i<inputList.length;i++) { daInput = inputList[i];
-		if (daInput.type == "file") { for (ii=0;ii<daInput.files.length;ii++) {	daFormData.append(daInput.name+ii.toString(),daInput.files[ii])	}	}
-		else if (daInput.type == "radio" || daInput.type == "checkbox") { name = daInput.name; daValue = daParent.querySelector("input[name='"+name+"']:checked").value;
-			if (!finishedOptions.includes(name)&&daValue!=null) {daFormData.append(name,daValue); finishedOptions.push(name) }																				 
-		}	else { daFormData.append(daInput.name,daInput.value) }																
-	}
+	daFormData = new FormData();
+	inputList = daParent.querySelectorAll(selectors); finishedOptions = []; 
+	for (let i=0;i<inputList.length;i++) { daInput = inputList[i];
+		if (daInput.type == "file") { for ( let ii=0;ii<daInput.files.length;ii++) {	daFormData.append(daInput.name+ii.toString(),daInput.files[ii])	}	}
+		else if (daInput.type == "radio" || daInput.type == "checkbox") { daName = daInput.name; daValue = daParent.querySelector("input[name='"+daName+"']:checked").value;
+			if (!finishedOptions.includes(daName)&&daValue!=null) {daFormData.append(daName,"\""+daValue+"\""); finishedOptions.push(daName) }																				 
+		}	else { daFormData.append(daInput.name,"\""+daInput.value+"\"") }																
+	} console.log({daFormData});
 	fetchadids(source, { method: "POST", body: daFormData }, daFunction);
 }
 
 function listenerValidate(selectors="input,select,textarea",daParent=document,display="block") {
 	inputList = daParent.querySelectorAll(selectors);
-	for (i=0;i<inputList.length;i++) { inputList[i].addEventListener("change",event=>{validateInput(event.target,display)}) }
+	for (i=0;i<inputList.length;i++) { inputList[i].addEventListener("change",event=>{validateInput(event.target,display)}) } 
 }

@@ -17,3 +17,18 @@
 </div></section>
 
 </div> <!--main-->
+
+<script>
+  listenerValidate();
+  submitButton = document.querySelector("#submitButton");
+  submitButton.addEventListener("click",event => {
+    if (validateInputs()) { 
+      toggleProcessCursor(document.documentElement); submitButton.innerHTML = "...";
+      submitForm("/contact",data => {
+        alert(data["response"]);
+        toggleProcessCursor(document.documentElement);
+        submitButton.innerHTML = "Submit";
+      });
+    } else { alert("Form still has unfilled information; please reevaluate.") }
+  });
+</script>

@@ -1,4 +1,4 @@
-var fs = require("fs");
+var fs = require("fs"); var nodemailer = require("nodemailer"); var mysql = require("mysql"); var secret = require("./secret.json"); var util = require("util");
 
 exports.serveFile = (file,status,headers,response) => {
   fs.readFile(file,(error,fileData) => {
@@ -19,107 +19,137 @@ exports.servePage = (page,status,headers,response) => {
   });
 }
 
+exports.processPOST = (request,daFunction) => {
+  var formData = {}; var stream;
+  request.on("data", (chunk) => { stream += chunk } )
+  request.on("end", () => { 
+    chunks = [];
+    while (stream.includes("Content-Disposition")) {
+      start = stream.indexOf("Content-Disposition"); stream = stream.slice(start+"Content-Disposition: ".length,-1)+stream.slice(-1,-1); 
+      end = stream.indexOf("Content-Disposition"); 
+      dataString = stream.slice(0,end); output = {};
+      stream = stream.slice(end,-1)+stream.slice(-1,-1);
+      type = dataString.slice(0,dataString.indexOf(";"));
+      if (!type.includes("image")) {
+        dataString = dataString.slice(dataString.indexOf("\"")+1,-1)+dataString.slice(-1,-1);
+        daKey = dataString.slice(0,dataString.indexOf("\"")); dataString = dataString.replace(daKey+"\"","");
+        dataString = dataString = dataString.slice(dataString.indexOf("\"")+1,-1)+dataString.slice(-1,-1);
+        daValue = dataString.slice(0,dataString.indexOf("\"")); dataString = dataString.replace(daValue+"\"","");
+        formData[daKey] = daValue;
+      }
+    }
+    daFunction(formData);
+  });
+}
+
 exports.sendEmail = (subject,body,signature,files=[]) => {
-  msg = MIMEMultipart();
-	msg["To"] = getenv("emailTo");
-	msg["From"] = getenv("emailFrom");
-	msg["Subject"] = subject;
-	content = MIMEText("<!DOCTYPE html><html><body>"+mainContent+"<p style=\"color: #ADADAD\">"+signature+"</p></body></html>","html");
-	msg.attach(content);
-  for (let i=0;i<files.length;i++) { msg.attach(MIMEImage(files[i].read())) }
-	server = smtplib.SMTP_SSL('smtp.gmail.com', 465);
-	server.login(getenv("emailFrom"), getenv("loginPassword"));
-	server.send_message(msg);
-	server.quit();
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user:secret.sender,
+      pass: secret.sendPass
+    }
+  });
+  var mailContent = {
+    from: secret.sender,
+    to: secret.receiver,
+    subject: subject,
+    html: "<!DOCTYPE html><html><body>"+body+"<p style=\"color: #ADADAD\">"+signature+"</p></body></html>",
+    attachements: [
+      { filename: "Palm Tree Homie", path: "image/palmTree.png" }
+    ]
+  };
+  transporter.sendMail(mailContent, function(error, info){
+    if (error) { console.log(error) } 
+  });
 }
 
 exports.submittedApplication = (formData) => {
   daFiles = [];
-  for (let i=0;i<formData.files.to_dict(flat=False);i++) { daFile.push(formData.files[i]) }
-  incomeList = ["monthlySalary","monthlySalary1","otherIncomeAmount"]; toatalIncome = 0; 
+  //for (let i=0;i<formData.files.to_dict(flat=False);i++) { daFile.push(formData.files[i]) }
+  incomeList = ["monthlySalary","monthlySalary1","otherIncomeAmount"]; var totalIncome = 0; 
   for (let i=0;i<incomeList.length;i++) { 
     if (formData[incomeList[i]] != "") { totalIncome += formData[incomeList[i]] } 
   }
   fs.readFile("html/applicationDocument.html",(error,htmlFile) => {
-    htmlPage = htmlFile.format(
-      firstName=formData.firstName,
-      lastName=formData.lastName,
-      phoneNumber=formData.phoneNumber,
-      emailAddress=formData.emailAddress,
+    htmlPage = util.format(htmlFile.toString(),
+      formData["firstName"],
+      formData["lastName"],
+      formData["phoneNumber"],
+      formData["emailAddress"],
       
-      otherAdults=formData.otherAdults,
-      numOfKids=formData.numOfKids, 
-      numOfPets=formData.numOfPets,
-      petType=formData.petType,
-      numOfDruggies=formData.numOfDruggies,
+      formData["otherAdults"],
+      formData["numOfKids"], 
+      formData["numOfPets"],
+      formData["petType"],
+      formData["numOfDruggies"],
       
-      tenantScale=formData.tenantScale,
-      savedAmount=formData.savedAmount,
-      hearAboutUs=formData.hearAboutUs,
-      moveDate=formData.moveDate,
+      formData["tenantScale"],
+      formData["savedAmount"],
+      formData["hearAboutUs"],
+      formData["moveDate"],
       
-      currentAddress=formData.currentAddress,
-      currentMovedIn=formData.currentMovedIn,
-      currentMovedOut=formData.currentMovedOut,
-      currentMonthlyRent=formData.currentMonthlyRent,
-      currentLandlord=formData.currentLandlord,
-      currentLandlordPhone=formData.currentLandlordPhone,
-      currentLeave=formData.currentLeave,
-      
-      priorAddress=formData.priorAddress,
-      priorMovedIn=formData.priorMovedIn,
-      priorMovedOut=formData.priorMovedOut,
-      priorMonthlyRent=formData.priorMonthlyRent,
-      priorLandlord=formData.priorLandlord,
-      priorLandlordPhone=formData.priorLandlordPhone,
-      priorLeave=formData.priorLeave,
+      formData["currentAddress"],
+      formData["priorAddress"],
 
-      companyName=formData.companyName,
-      occupation=formData.occupation,
-      jobLocation=formData.jobLocation,
-      position=formData.position,
-      supervisorName=formData.supervisorName,
-      supervisorPhone=formData.supervisorPhone,
-      schedule=formData.schedule,
-      startDate=formData.startDate,
-      endDate=formData.endDate,
-      monthlySalary=formData.monthlySalary,
+      formData["currentMovedIn"],
+      formData["currentMovedOut"],
+      formData["currentMonthlyRent"],
+      formData["priorMovedIn"],
+      formData["priorMovedOut"],
+      formData["priorMonthlyRent"],
 
-      companyName1=formData.companyName1,
-      occupation1=formData.occupation1,
-      jobLocation1=formData.jobLocation1,
-      position1=formData.position1,
-      supervisorName1=formData.supervisorName1,
-      supervisorPhone1=formData.supervisorPhone1,
-      schedule1=formData.schedule1,
-      startDate1=formData.startDate1,
-      endDate1=formData.endDate1,
-      monthlySalary1=formData.monthlySalary1,
+      formData["currentLandlord"],
+      formData["currentLandlordPhone"],
+      formData["priorLandlord"],
+      formData["priorLandlordPhone"],
 
-      otherIncome=formData.otherIncome,
-      otherIncomeAmount=formData.otherIncomeAmount,
-      totalIncome=totalIncome,
+      formData["currentLeave"],
+      formData["priorLeave"],
 
-      parking=formData.parking,
-      oddHours=formData.oddHours,
-      overnightGuests=formData.overnightGuests,
-      againstRules=formData.againstRules,
-      lateBills=formData.lateBills,
-      evicted=formData.evicted,
-      sued=formData.sued,
-      informedLandlord=formData.informedLandlord,
+      formData["companyName"],
+      formData["occupation"],
+      formData["jobLocation"],
+      formData["position"],
+      formData["supervisorName"],
+      formData["supervisorPhone"],
+      formData["schedule"],
+      formData["startDate"],
+      formData["endDate"],
+      formData["monthlySalary"],
 
-      person1Name=formData.person1Name,
-      person1Phone=formData.person1Phone,
-      person1Relationship=formData.person1Relationship,
-      person2Name=formData.person2Name,
-      person2Phone=formData.person2Phone,
-      person2Relationship=formData.person2Relationship,
-      
-      signature=formData.signature,
-      signDate=formData.signDate
-    )
-    sendEmail("New Application from "+formData.firstName+" "+formData.lastName,
+      formData["companyName1"],
+      formData["occupation1"],
+      formData["jobLocation1"],
+      formData["position1"],
+      formData["supervisorName1"],
+      formData["supervisorPhone1"],
+      formData["schedule1"],
+      formData["startDate1"],
+      formData["endDate1"],
+      formData["monthlySalary1"],
+
+      formData["otherIncome"],
+      formData["otherIncomeAmount"],
+      totalIncome,
+
+      formData["parking"],
+      formData["lateBills"],
+      formData["oddHours"],
+      formData["evicted"],
+      formData["overnightGuests"],
+      formData["sued"],
+      formData["againstRules"],
+      formData["informedLandlord"],
+
+      formData["person1Name"],
+      formData["person1Phone"],
+      formData["person1Relationship"],
+      formData["person2Name"],
+      formData["person2Phone"],
+      formData["person2Relationship"]
+    );
+    this.sendEmail("New Application from "+formData["firstName"]+" "+formData["lastName"],
       htmlPage,
       "",
       daFiles)

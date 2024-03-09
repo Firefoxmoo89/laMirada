@@ -101,7 +101,7 @@
       <input required type="date" id="endDate" name="endDate">
     </label><label for="monthlySalary">Monthly Salary:
       <input required type="number" id="monthlySalary" name="monthlySalary" class="money">
-    </label><label for="rentalStatement">Proof of Income (ex. w2, pay stubs, etc):
+    </label><label for="incomeStatement">Proof of Income (ex. w2, pay stubs, etc):
       <input required type="file" accept="image/*" id="incomeStatement" name="incomeStatement" multiple>
     </label><div class="label">
       <input type="checkbox" id="extraIncome" name="extraIncome" class="simple" data-submitform="ignore" onchange="toggleDisplay('div#otherIncome')"><label for="extraIncome">Add Second Income (please fill if applicable)</label>
@@ -206,7 +206,7 @@
       submitButton.innerHTML = "<img src='../image/loadingIcon.gif' alt='loading' style='width:20px;height:20px'>";
       toggleProcessCursor(document.documentElement);
       submitForm("/apply", (data) => {
-        toggleProcessCursor(document.documentElement); alert(data["feedback"]); submitButton.innerHTML = "Submit";
+        toggleProcessCursor(document.documentElement); alert(data["response"]); submitButton.innerHTML = "Submit";
       });
     }}
   });
