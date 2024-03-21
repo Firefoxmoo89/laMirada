@@ -1,4 +1,5 @@
-var http = require('http'); var url = require("url"); var fs = require("fs"); var rad = require("./radicalModule.js");
+var http = require('http'); var url = require("url"); var fs = require("fs"); 
+var rad = require("./radicalModule.js"); var mail = require("./mail.js");
 console.log("Go to http://localhost")  
 
 http.createServer((request, response) => {
@@ -18,10 +19,10 @@ http.createServer((request, response) => {
       rad.servePage("apply",200,{},response);
     } else if (request.method == "POST") {
       formData = rad.processPOST(request,(formData) => {
-        rad.submittedApplication(formData);
+        mail.submittedApplication(formData);
         response.writeHead(200,{});
-        response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
-      });
+      });        
+      response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
     }
   }
   else if (deets.pathname == "/contact") {
@@ -30,10 +31,9 @@ http.createServer((request, response) => {
     } else if (request.method == "POST") {
       formData = rad.processPOST(request,(formData) => {
         console.log(formData);
-        rad.sendEmail("Inquiry from "+formData.daName,formData.body,formData.daName+"<br>Email: "+formData.daAddress+"<br>Number: "+formData.daNumber+"<br>Prefers: "+formData.contactMethod);
-        response.end(JSON.stringify({"response":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
+        mail.sendEmail("Inquiry from "+formData.daName,formData.body,formData.daName+"<br>Email: "+formData.daAddress+"<br>Number: "+formData.daNumber+"<br>Prefers: "+formData.contactMethod);
       });
-      
+      response.end(JSON.stringify({"response":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
     }
   }
   else if (deets.pathname.includes("/style")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/css"},response) }
