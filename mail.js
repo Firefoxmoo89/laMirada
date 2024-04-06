@@ -1,16 +1,16 @@
-var fs = require("fs"); var nodemailer = require("nodemailer"); var secret = require("./secret.json"); var util = require("util");
+var fs = require("fs"); var nodemailer = require("nodemailer"); var util = require("util");
 
 exports.sendEmail = (subject,body,signature,files=[]) => {
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user:secret.sender,
-        pass: secret.sendPass
+        user:process.env.sender,
+        pass: process.env.sendPass
       }
     });
     var mailContent = {
-      from: secret.sender,
-      to: secret.receiver,
+      from: process.env.sender,
+      to: process.env.receiver,
       subject: subject,
       html: "<!DOCTYPE html><html><body>"+body+"<p style=\"color: #ADADAD\">"+signature+"</p></body></html>",
       attachements: [
