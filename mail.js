@@ -27,9 +27,7 @@ exports.sendEmail = (subject,body,signature,filenameList=[]) => {
   
   exports.submittedApplication = (formData) => {
     incomeList = ["monthlySalary","monthlySalary1","otherIncomeAmount"]; var totalIncome = 0; 
-    for (let i=0;i<incomeList.length;i++) { 
-      if (formData[incomeList[i]] != "") { totalIncome += formData[incomeList[i]] } 
-    }
+    for (let id of incomeList) { if (formData[id] != "") { totalIncome += Number(formData[id]) } }
     fs.readFile("html/applicationDocument.html",(error,htmlFile) => {
       htmlPage = util.format(htmlFile.toString(),
         formData["firstName"],
@@ -90,7 +88,7 @@ exports.sendEmail = (subject,body,signature,filenameList=[]) => {
   
         formData["otherIncome"],
         formData["otherIncomeAmount"],
-        totalIncome,
+        totalIncome.toString(),
   
         formData["parking"],
         formData["lateBills"],
