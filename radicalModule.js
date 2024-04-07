@@ -31,11 +31,13 @@ exports.processPOST = (request,response,daFunction) => {
       return newName+ext
     }
   }); 
-  form.parse(request, function (parseError, formData, files) {
+  form.parse(request, function (parseError, fields, files) {
     if (parseError) { 
       response.writeHead(400,{}); 
       response.end(JSON.stringify({"response":"Image uploads failed; please check the validity of your images"})) 
     }
+    formData = {};
+    for (var key of Object.keys(fields)) { formData[key] = fields[key][0] }
     formData.filenameList = filenameList;
     daFunction(formData);
   });

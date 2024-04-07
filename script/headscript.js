@@ -47,8 +47,8 @@ function submitForm(source, daFunction, selectors="input:not([data-submitform='i
 		if (daInput.type == "file") { for ( let ii=0;ii<daInput.files.length;ii++) {	daFormData.append(daInput.name+ii.toString(),daInput.files[ii])	}	}
 		else if (daInput.type == "radio" || daInput.type == "checkbox") { daName = daInput.name; daValue = daParent.querySelector("input[name='"+daName+"']:checked").value;
 			if (!finishedOptions.includes(daName)&&daValue!=null) {daFormData.append(daName,daValue); finishedOptions.push(daName) }																				 
-		} else { daFormData.append(daInput.name,+daInput.value) }																
-	} console.log({daFormData});
+		} else { daFormData.append(daInput.name,daInput.value) }																
+	} 
 	fetchadids(source, { method: "POST", body: daFormData }, daFunction);
 }
 
