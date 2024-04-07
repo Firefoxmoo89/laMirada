@@ -37,7 +37,6 @@ exports.processPOST = (request,response,daFunction) => {
       response.end(JSON.stringify({"response":"Image uploads failed; please check the validity of your images"})) 
     }
     formData.filenameList = filenameList;
-    console.log(formData);
     daFunction(formData);
   });
 }
