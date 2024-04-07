@@ -1,6 +1,5 @@
 var http = require('http'); var url = require("url"); var fs = require("fs"); 
 var rad = require("./radicalModule.js"); var mail = require("./mail.js");
-console.log("Go to http://localhost")  
 
 http.createServer((request, response) => {
   deets = url.parse(request.url, true);
