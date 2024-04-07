@@ -1,4 +1,4 @@
-var fs = require("fs"); var util = require("util");
+var fs = require("fs"); var util = require("util"); var formidable = require("formidable");
 //var mysql = require("mysql"); 
 
 exports.serveFile = (file,status,headers,response) => {
@@ -20,25 +20,24 @@ exports.servePage = (page,status,headers,response) => {
   });
 }
 
-exports.processPOST = (request,daFunction) => {
-  var formData = {}; var stream;
-  request.on("data", (chunk) => { stream += chunk } )
-  request.on("end", () => { 
-    chunks = [];
-    while (stream.includes("Content-Disposition")) {
-      start = stream.indexOf("Content-Disposition"); stream = stream.slice(start+"Content-Disposition: ".length,-1)+stream.slice(-1,-1); 
-      end = stream.indexOf("Content-Disposition"); 
-      dataString = stream.slice(0,end); output = {};
-      stream = stream.slice(end,-1)+stream.slice(-1,-1);
-      type = dataString.slice(0,dataString.indexOf(";"));
-      if (!type.includes("image")) {
-        dataString = dataString.slice(dataString.indexOf("\"")+1,-1)+dataString.slice(-1,-1);
-        daKey = dataString.slice(0,dataString.indexOf("\"")); dataString = dataString.replace(daKey+"\"","");
-        dataString = dataString = dataString.slice(dataString.indexOf("\"")+1,-1)+dataString.slice(-1,-1);
-        daValue = dataString.slice(0,dataString.indexOf("\"")); dataString = dataString.replace(daValue+"\"","");
-        formData[daKey] = daValue;
-      }
+exports.processPOST = (request,response,daFunction) => {
+  var filenameList = [];
+  var form = new formidable.IncomingForm({
+    multiples: true, uploadDir: "temp/", maxFileSize: 50 * 1024 * 1024, keepExtensions: true, 
+    filename: (name, ext, part, form) => { 
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; newName = "";
+      for (let i=0;i<16;i++) { newName += characters.charAt(Math.floor(Math.random()*characters.length)) }
+      filenameList.push(newName+ext);
+      return newName+ext
     }
+  }); 
+  form.parse(request, function (parseError, formData, files) {
+    if (parseError) { 
+      response.writeHead(400,{}); 
+      response.end(JSON.stringify({"response":"Image uploads failed; please check the validity of your images"})) 
+    }
+    formData.filenameList = filenameList;
+    console.log(formData);
     daFunction(formData);
   });
 }

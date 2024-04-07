@@ -1,6 +1,6 @@
 var fs = require("fs"); var nodemailer = require("nodemailer"); var util = require("util");
 
-exports.sendEmail = (subject,body,signature,files=[]) => {
+exports.sendEmail = (subject,body,signature,filenameList=[]) => {
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -8,23 +8,24 @@ exports.sendEmail = (subject,body,signature,files=[]) => {
         pass: process.env.sendPass
       }
     });
+    attachments = [];
+    for (var filename of filenameList) { attachments.push({filename:filename,path:"temp/"+filename}) }
     var mailContent = {
       from: process.env.sender,
       to: process.env.receiver,
       subject: subject,
       html: "<!DOCTYPE html><html><body>"+body+"<p style=\"color: #ADADAD\">"+signature+"</p></body></html>",
-      attachements: [
-        { filename: "Palm Tree Homie", path: "image/palmTree.png" }
-      ]
+      attachments: attachments
     };
     transporter.sendMail(mailContent, function(error, info){
       if (error) { console.log(error) } 
+      for (var filename of filenameList) {
+        fs.unlink("temp/"+filename, (err) => { if (err) { console.error(err) } });
+      }
     });
   }
   
   exports.submittedApplication = (formData) => {
-    daFiles = [];
-    //for (let i=0;i<formData.files.to_dict(flat=False);i++) { daFile.push(formData.files[i]) }
     incomeList = ["monthlySalary","monthlySalary1","otherIncomeAmount"]; var totalIncome = 0; 
     for (let i=0;i<incomeList.length;i++) { 
       if (formData[incomeList[i]] != "") { totalIncome += formData[incomeList[i]] } 
@@ -110,7 +111,7 @@ exports.sendEmail = (subject,body,signature,files=[]) => {
       this.sendEmail("New Application from "+formData["firstName"]+" "+formData["lastName"],
         htmlPage,
         "",
-        daFiles)
+        formData.filenameList)
     });
   }
   

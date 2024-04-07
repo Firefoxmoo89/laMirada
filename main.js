@@ -18,11 +18,11 @@ http.createServer((request, response) => {
     if (request.method == "GET") {
       rad.servePage("apply",200,{},response);
     } else if (request.method == "POST") {
-      formData = rad.processPOST(request,(formData) => {
+      formData = rad.processPOST(request,response,(formData) => {
         mail.submittedApplication(formData);
+        response.writeHead(200,{});
+        response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
       });
-      response.writeHead(200,{});
-      response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
     }
   }
   else if (deets.pathname == "/contact") {
@@ -30,7 +30,6 @@ http.createServer((request, response) => {
       rad.servePage("contact",200,{},response);
     } else if (request.method == "POST") {
       formData = rad.processPOST(request,(formData) => {
-        console.log(formData);
         mail.sendEmail("Inquiry from "+formData.daName,formData.body,formData.daName+"<br>Email: "+formData.daAddress+"<br>Number: "+formData.daNumber+"<br>Prefers: "+formData.contactMethod);
       });
       response.end(JSON.stringify({"response":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
