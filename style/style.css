@@ -32,7 +32,7 @@ div#main {
 div#main > section.colored { background-color: #34934c; color: #ffffff }
 div#main > section > div {
 	max-width: 100%; width: 960px;
-	margin: auto;	padding: 4rem 6rem;
+	margin: auto;	padding: 2rem 6rem;
 	text-align: center;
 }
 footer { width: 100%; background-color:#2b303a }
@@ -59,16 +59,22 @@ div#main a,div#main a:visited { text-decoration: none; color: #414042; font-weig
 img.logo { width: 100px; margin: 2px }
 h1 { margin-top: 0; font-weight: 300; line-height: 1.2; font-size: 2.5em; text-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px }
 .mobile { display: none }
+div.flexrow { display:flex; flex-direction:row; align-items:start }
+div.flexrow > div { flex-grow:1 }
+div.flexrow > div > input { width: 95%; margin: auto }
+span.invalid { color: red; font-weight: bold; font-size: 1.2em }
 label,div.label {
+	margin: 0 0 10px 0;
 	cursor: pointer;
-	font-weight: bold;
-	display: block;	margin: 30px 0 0 0;
+	display: block;
+	font-size: 10pt;
 }
 input[type="radio"],input[type="checkbox"]:not(.simple) { display: none }
 input[type="radio"]+label,input[type="checkbox"]:not(.simple)+label {
 	padding: 10px 20%; margin: 5px 20%; 
 	display: block;	width: 60%;
-	background-color: #b6c4b6; color: #000;
+	background-color: #b6c4b6; 
+	color: #000; font-size: 12pt;
 	border-radius: 8px;
 }
 input[type="radio"]:checked+label,input[type="checkbox"]:not(.simple):checked+label {
@@ -81,7 +87,7 @@ input[type="checkbox"].simple { margin: 0 10px; width: 1.5em; height: 1.5em } in
 input:not([type="checkbox"],[type="radio"],[type="file"],[type="range"]),textarea {
 	margin: 0 10% 0 10%; padding: .7em 1em;
 	display: block;
-	cursor: pointer; font-size: 1.1em;
+	cursor: pointer; font-size: 14pt;
 	width: 80%; 
 	border: none; border-radius: 8px; outline: none;
 	background-color: #b6c4b6;
@@ -93,7 +99,7 @@ textarea:focus,input:not(input[type="radio"],input[type="file"]):focus {
 	border-bottom: 2px solid black;
 }
 textarea { resize: vertical } textarea:placeholder { padding: 5px }
-input[type="date"] { padding: 0.5em; font-size: 1.2em }
+input[type="date"] { padding: 0.5em; font-size: 14pt }
 input[type="date"],input[type="number"] { display: inline }
 input[type="range"] { cursor: crosshair }
 input[type="number"].money { 

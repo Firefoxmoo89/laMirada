@@ -18,13 +18,15 @@ async function fetchadids(source, options, daFunction) {
 }
 
 function mark(daInput,display="inline") {
+	daLabel = daInput.parentElement.querySelector("label[for='"+daInput.name+"']");
 	invalidSpan = document.createElement("span"); invalidSpan.innerHTML = "*Required";
 	invalidSpan.setAttribute("class","invalid"); invalidSpan.style.display = display;
-	if (daInput.parentElement.querySelector(".invalid")==null) { daInput.parentElement.appendChild(invalidSpan) }
+	if (daLabel.querySelector(".invalid")==null) { daLabel.appendChild(invalidSpan) }
 }
 function validateInput(daInput,display="inline") { 
 	if (daInput.required) {
-		if (daInput.parentElement.querySelector(".invalid")!=null) { daInput.parentElement.removeChild(daInput.parentElement.querySelector(".invalid")) }
+		daLabel = daInput.parentElement.querySelector("label[for='"+daInput.name+"']");
+		if (daLabel.querySelector(".invalid") != null) { daLabel.querySelector(".invalid").remove() }
 		if (daInput.type == "radio" || daInput.type == "checkbox") { 
 			if (document.querySelector("input[name='"+daInput.name+"']:checked") == null) { mark(daInput,display); return false } 
 		} else if (daInput.type == "tel" && daInput.value.length<14) { mark (daInput,display); return false }
@@ -50,9 +52,4 @@ function submitForm(source, daFunction, selectors="input:not([data-submitform='i
 		} else { daFormData.append(daInput.name,daInput.value) }																
 	} 
 	fetchadids(source, { method: "POST", body: daFormData }, daFunction);
-}
-
-function listenerValidate(selectors="input,select,textarea",daParent=document,display="block") {
-	inputList = daParent.querySelectorAll(selectors);
-	for (i=0;i<inputList.length;i++) { inputList[i].addEventListener("change",event=>{validateInput(event.target,display)}) } 
 }
