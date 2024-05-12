@@ -82,7 +82,7 @@ input[type="radio"]:checked+label,input[type="checkbox"]:not(.simple):checked+la
 	font-weight: bold;
 	border: solid black 1px;
 }
-input[type="radio"]+label.inline,input[type="checkbox"]:not(.simple)+label.inline { display:inline; margin: 0; padding: 10px 20px }
+input[type="radio"]+label.inline,input[type="checkbox"]:not(.simple)+label.inline { display:inline; margin: 0; padding: 5px 20px }
 input[type="checkbox"].simple { margin: 0 10px; width: 1.5em; height: 1.5em } input[type="checkbox"].simple+label { display: inline }
 input:not([type="checkbox"],[type="radio"],[type="file"],[type="range"]),textarea {
 	margin: 0 10% 0 10%; padding: .7em 1em;

@@ -63,54 +63,56 @@
   <input required type="text" id=currentStreet" name="currentStreet"> <!-- Needs JS inputs start-->
   <label for="currentStreet">Street Address</label>
   <div class="flexrow" style="margin:0 5% 0 5%;width:90%">
-      <div style="flex-grow:10">
-        <input required type="text" id="currentCity" name="currentCity">
-        <label for="currentCity">City</label>
-      </div><div>
-        <input required type="text" id="currentState" name="currentState">
-        <label for="currentState">State</label>
-      </div>
-    </div><div class="flexrow" style="margin:0 5% 0 5%;width:90%">
-      <div>
-        <input required type="text" id="currentZip" name="currentZip">
-        <label for="currentZip">Zip Code</label>
-      </div><div style="flex-grow:15">
-        <input required type="text" id="currentCountry" name="currentCountry">
-        <label for="currentCountry">Country</label>
-      </div>
-    </div>  <!-- Needs JS inputs end -->  <!-- Needs JS removed for "currentAddress" -->
-    <div class="flexrow" style="margin:0 5% 0 5%;width:90%">
-      <div>
-        <input required type="number" id="currentMonthlyRent" name="currentMonthlyRent" class="money">
-        <label for="currentMonthlyRent">Current Monthly Rent</label>
-      </div><div>
-        <input required type="date" id="currentMovedIn" name="currentMovedIn">
-        <label for="currentMovedIn">Date Moved In</label>
-      </div><div>
-        <input type="date" id="currentMovedOut" name="currentMovedOut">
-        <label for="currentMovedOut">Date Moved Out</label>
-      </div>
+    <div style="flex-grow:10">
+      <input required type="text" id="currentCity" name="currentCity">
+      <label for="currentCity">City</label>
+    </div><div>
+      <input required type="text" id="currentState" name="currentState">
+      <label for="currentState">State</label>
     </div>
-    <div class="flexrow" style="margin:0 5% 0 5%;width:90%">
-      <div>
-        <input required type="text" id="currentLandlord" name="currentLandlord">
-        <label for="currentLandlord">Landlord Name</label>
-      </div><div>
-        <input required type="tel" id="currentLandlordPhone" name="currentLandlordPhone">
-        <label for="currentLandlordPhone">Landlord Phone</label>
-      </div>
+  </div><div class="flexrow" style="margin:0 5% 0 5%;width:90%">
+    <div>
+      <input required type="text" id="currentZip" name="currentZip">
+      <label for="currentZip">Zip Code</label>
+    </div><div style="flex-grow:15">
+      <input required type="text" id="currentCountry" name="currentCountry">
+      <label for="currentCountry">Country</label>
     </div>
-    <textarea required id="currentLeave" name="currentLeave"></textarea>
-    <label for="currentLeave">Reason for Leaving</label>
-    <label for="rentalStatement">Current Rental Statement (If possible, please provide):
-      <input type="file" accept="image/*" id="rentalStatement" name="rentalStatement" multiple>
-    </label><div class="label">
-      <input type="checkbox" id="extraRental" name="extraRental" class="simple" data-submitform="ignore" onchange="toggleDisplay('div#priorRental')"><label for="extraRental">Add Second Rental (please fill if applicable)</label> <!-- Needs JS -->
+  </div>  <!-- Needs JS inputs end -->  <!-- Needs JS removed for "currentAddress" -->
+  <div class="flexrow" style="margin:0 5% 0 5%;width:90%">
+    <div>
+      <input required type="number" id="currentMonthlyRent" name="currentMonthlyRent" class="money">
+      <label for="currentMonthlyRent">Current Monthly Rent</label>
+    </div><div>
+      <input required type="date" id="currentMovedIn" name="currentMovedIn">
+      <label for="currentMovedIn">Date Moved In</label>
+    </div><div>
+      <input type="date" id="currentMovedOut" name="currentMovedOut">
+      <label for="currentMovedOut">Date Moved Out</label>
     </div>
+  </div>
+  <div class="flexrow" style="margin:0 5% 0 5%;width:90%">
+    <div>
+      <input required type="text" id="currentLandlord" name="currentLandlord">
+      <label for="currentLandlord">Landlord Name</label>
+    </div><div>
+      <input required type="tel" id="currentLandlordPhone" name="currentLandlordPhone">
+      <label for="currentLandlordPhone">Landlord Phone</label>
+    </div>
+  </div>
+  <textarea required id="currentLeave" name="currentLeave"></textarea>
+  <label for="currentLeave">Reason for Leaving</label>
+  <div>
+    <label for="rentalStatement" style="display:inline">Current Rental Statement / Proof of Rent</label>
+    <input type="file" accept="image/*" id="rentalStatement" name="rentalStatement" multiple>
+  </div><div style="margin: 20px 0">
+    <input type="checkbox" id="extraRental" name="extraRental" class="simple" data-submitform="ignore" onchange="toggleDisplay('div#priorRental')">
+    <label for="extraRental">Add Second Rental (please fill if applicable)</label>
+  </div>
   <div id="priorRental" style="display:none"><h3 class="articleTitle">Prior Rental</h3>
     <input required type="text" id=priorStreet" name="priorStreet"> <!-- Needs JS inputs start-->
   <label for="priorStreet">Street Address</label>
-  <div class="flexrow" style="margin:0 5% 0 5%;width:90%">
+    <div class="flexrow" style="margin:0 5% 0 5%;width:90%">
       <div style="flex-grow:10">
         <input required type="text" id="priorCity" name="priorCity">
         <label for="priorCity">City</label>
@@ -148,9 +150,8 @@
         <label for="priorLandlordPhone">Landlord Phone</label>
       </div>
     </div>
-    <label for="priorLeave">Reason for Leaving:
-      <textarea required id="priorLeave" name="priorLeave"></textarea>
-    </label>
+    <textarea required id="priorLeave" name="priorLeave"></textarea>
+    <label for="priorLeave">Reason for Leaving</label>
   </div>
 </div></section><section class="colored"><div>	
   <h1 class="articleTitle">Applicant's Income History</h1>

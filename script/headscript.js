@@ -11,6 +11,12 @@ function toggleProcessCursor(element) {
 	} 
 }
 
+function toggleDisplay(selector,option1="none",option2="block") {
+	element = document.querySelector(selector);
+	if (element.style.display == option1) { element.style.display = option2 }
+	else { element.style.display = option1 }
+}
+
 async function fetchadids(source, options, daFunction) {
 	await fetch(source,options)
 	.then(response => response.json())
