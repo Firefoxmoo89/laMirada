@@ -1,7 +1,6 @@
 var http = require('http'); var url = require("url"); var fs = require("fs"); 
 var rad = require("./radicalModule.js"); var mail = require("./mail.js");
-
-http.createServer((request, response) => {
+function daServer(request, response) {
   deets = url.parse(request.url, true);
  
   if (deets.pathname == "/") {
@@ -40,4 +39,7 @@ http.createServer((request, response) => {
   else {
     rad.servePage("missing",404,{},response);
   }
-}).listen(80);
+}
+
+http.createServer(daServer).listen(80);
+http.createServer(daServer).listen(3000);
