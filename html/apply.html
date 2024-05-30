@@ -21,7 +21,7 @@
     <div>
       <input required type="tel" id="phoneNumber" name="phoneNumber" placeholder="(555) 555-5555">
       <label for="phoneNumber">Phone Number</label>
-    </div><div style="flex-grow:10;flex-shrink:1">
+    </div><div class="largeFlex">
       <input required type="email" id="emailAddress" name="emailAddress" placeholder="example@email.com">
       <label for="emailAddress">Email Address</label>
     </div>
@@ -46,10 +46,12 @@
   <input required type="text" id="petType" name="petType">
   <label for="petType">Pet Type(s)</label>
 </div></section><section class="colored"><div>	
-  <label for="tenantScale">On a scale of 1-10, how are you as a tenant?
-    <input required type="range" id="tenantScale" name="tenantScale" min="0" max="10" style="margin-right: 20px">
+  <div style="margin-bottom:10px">
+    <label for="tenantScale" style="display:inline">On a scale of 1-10, how are you as a tenant?</label>
+    <input required type="range" id="tenantScale" name="tenantScale" min="0" max="10" style="margin-right:20px">
     <span id="tenantScaleDisplay">5</span>
-  </label><div class="flexrow">
+  </div>
+  <div class="flexrow">
     <div>
       <input required type="number" id="savedAmount" name="savedAmount" class="money">
       <label for="savedAmount">How much do you have saved for move-in costs?</label>
@@ -62,11 +64,11 @@
   <label for="hearAboutUs">How did you hear about us?</label>
 </div></section><section><div>	
   <h1 class="articleTitle">Applicant's Rental History</h1>
-  <h3 class="articleTitle">Most Recent Rental<br><span style="font-size:.9rem">(Use parents home if necessary)</span></h3>
+  <h2 class="articleTitle">Most Recent Rental<br><span style="font-size:.9rem">(Use parents home if necessary)</span></h2>
   <input required type="text" id="currentStreet" name="currentStreet"> <!-- Needs JS inputs start-->
   <label for="currentStreet">Street Address</label>
   <div class="flexrow">
-    <div style="flex-grow:10;flex-shrink:1">
+    <div class="largeFlex">
       <input required type="text" id="currentCity" name="currentCity">
       <label for="currentCity">City</label>
     </div><div>
@@ -77,7 +79,7 @@
     <div>
       <input required type="text" id="currentZip" name="currentZip">
       <label for="currentZip">Zip Code</label>
-    </div><div style="flex-grow:10;flex-shrink:1">
+    </div><div class="largeFlex">
       <input required type="text" id="currentCountry" name="currentCountry">
       <label for="currentCountry">Country</label>
     </div>
@@ -112,11 +114,11 @@
     <input type="checkbox" id="extraRental" name="extraRental" class="simple" data-submitform="ignore" onchange="toggleDisplay('div#priorRental')">
     <label for="extraRental" style="display:inline">Add Second Rental (please fill if applicable)</label>
   </div>
-  <div id="priorRental" style="display:none"><h3 class="articleTitle">Prior Rental</h3>
+  <div id="priorRental" style="display:none"><h2 class="articleTitle">Prior Rental</h2>
     <input required type="text" id="priorStreet" name="priorStreet"> <!-- Needs JS inputs start-->
   <label for="priorStreet">Street Address</label>
     <div class="flexrow">
-      <div style="flex-grow:10;flex-shrink:1">
+      <div class="largeFlex">
         <input required type="text" id="priorCity" name="priorCity">
         <label for="priorCity">City</label>
       </div><div>
@@ -127,7 +129,7 @@
       <div>
         <input required type="text" id="priorZip" name="priorZip">
         <label for="priorZip">Zip Code</label>
-      </div><div style="flex-grow:10;flex-shrink:1">
+      </div><div class="largeFlex">
         <input required type="text" id="priorCountry" name="priorCountry">
         <label for="priorCountry">Country</label>
       </div>
@@ -158,11 +160,11 @@
   </div>
 </div></section><section class="colored"><div>	
   <h1 class="articleTitle">Applicant's Income History</h1>
-  <h3 class="articleTitle">Income 1</h3>
+  <h2 class="articleTitle">Income 1</h2>
   <input required type="text" id="companyName" name="companyName">
   <label for="companyName">Employer/Company Name</label>
   <div class="flexrow">
-    <div style="flex-grow:10;flex-shrink:1">
+    <div class="largeFlex">
       <input required type="text" id="jobCity" name="jobCity">  <!--JS remove id=jobLocation-->
       <label for="jobCity">City</label>
     </div><div>
@@ -178,7 +180,7 @@
       <label for="position">Position</label>
     </div>
   </div><div class="flexrow">
-    <div style="flex-grow:5;flex-shrink:5">
+    <div class="largeFlex">
       <input required type="text" id="supervisorName" name="supervisorName">
       <label for="supervisorName">Supervisor Name</label>
     </div><div>
@@ -186,13 +188,13 @@
       <label for="supervisorPhone">Supervisor Phone</label>
     </div>
   </div><div class="flexrow">
-    <div style="flex-shrink:1">
+    <div class="largeFlex">
       <input required type="number" id="schedule" name="schedule">
       <label for="schedule">Hours / Week</label>
-    </div><div style="flex-shrink:20">
+    </div><div>
       <input required type="date" id="startDate" name="startDate">
       <label for="startDate">Start Date</label>
-    </div><div style="flex-shrink:20">
+    </div><div>
       <input required type="date" id="endDate" name="endDate">
       <label for="endDate">End Date</label>
     </div>
@@ -206,58 +208,70 @@
     <input type="checkbox" id="extraIncome" name="extraIncome" class="simple" data-submitform="ignore" onchange="toggleDisplay('div#otherIncomeDiv')">
     <label for="extraIncome" style="display:inline">Add Second Income (please fill if applicable)</label>
   </div>
-  <div id="otherIncomeDiv" style="display:none"><h3 class="articleTitle">Income 2</h3>
-    <input required type="text" id="companyName1" name="companyName1">
+  <div id="otherIncomeDiv" style="display:none"><h2 class="articleTitle">Income 2</h2>
+    <input type="text" id="companyName1" name="companyName1">
     <label for="companyName1">Employer/Company Name</label>
     <div class="flexrow">
-      <div style="flex-grow:10;flex-shrink:1">
-        <input required type="text" id="jobCity1" name="jobCity1">  <!--JS remove id=jobLocation-->
+      <div class="largeFlex">
+        <input type="text" id="jobCity1" name="jobCity1">  <!--JS remove id=jobLocation-->
         <label for="jobCity1">City</label>
       </div><div>
-        <input required type="text" id="jobState1" name="jobState1">
+        <input type="text" id="jobState1" name="jobState1">
         <label for="jobState1">State</label>
       </div>
     </div><div class="flexrow">
       <div>
-        <input required type="text" id="occupation1" name="occupation1">
+        <input type="text" id="occupation1" name="occupation1">
         <label for="occupation1">Occupation/Industry</label>
       </div><div>
-        <input required type="text" id="position1" name="position1">
+        <input type="text" id="position1" name="position1">
         <label for="position1">Position</label>
       </div>
     </div><div class="flexrow">
-      <div style="flex-grow:5;flex-shrink:5">
-        <input required type="text" id="supervisorName1" name="supervisorName1">
+      <div class="largeFlex">
+        <input type="text" id="supervisorName1" name="supervisorName1">
         <label for="supervisorName1">Supervisor Name</label>
       </div><div>
-        <input required type="tel" id="supervisorPhone1" name="supervisorPhone1">
+        <input type="tel" id="supervisorPhone1" name="supervisorPhone1">
         <label for="supervisorPhone1">Supervisor Phone</label>
       </div>
     </div><div class="flexrow">
-      <div style="flex-shrink:1">
-        <input required type="number" id="schedule1" name="schedule1">
+      <div class="largeFlex">
+        <input type="number" id="schedule1" name="schedule1">
         <label for="schedule1">Hours / Week</label>
-      </div><div style="flex-shrink:20">
-        <input required type="date" id="startDate1" name="startDate1">
+      </div><div>
+        <input type="date" id="startDate1" name="startDate1">
         <label for="startDate1">Start Date</label>
-      </div><div style="flex-shrink:20">
-        <input required type="date" id="endDate1" name="endDate1">
+      </div><div>
+        <input type="date" id="endDate1" name="endDate1">
         <label for="endDate1">End Date</label>
       </div>
     </div>
-    <input required type="number" id="monthlySalary1" name="monthlySalary1" class="money">
+    <input type="number" id="monthlySalary1" name="monthlySalary1" class="money">
     <label for="monthlySalary1">Monthly Salary</label>
   </div>
-  <input required type="text" id="otherIncome" name="otherIncome">
-  <label for="otherIncome">Other Income</label>
-  <input required type="number" id="otherIncomeAmount" name="otherIncomeAmount" class="money">
-  <label for="otherIncomeAmount">Other Monthly Income Amount</label>
-  <p>Total Current Monthly Income from All Income Sources: <span style="font-size:1.5em;font-weight:bold">$<span id="totalIncome"></span></span></p>
+  <div class="flexrow">
+    <div class="largeFlex">
+      <input required type="text" id="otherIncome" name="otherIncome">
+      <label for="otherIncome">Other Income</label>
+    </div><div>
+      <input required type="number" id="otherIncomeAmount" name="otherIncomeAmount" class="money">
+      <label for="otherIncomeAmount">Other Monthly Income Amount</label>
+    </div>
+  </div>
+  <p>Total Current Monthly Income from All Income Sources: <span style="font-size:1.5em;font-weight:bold">$<span id="totalIncome">0</span></span></p>
 </div></section><section><div>	
   <h1>Other Information</h1>
-  <label for="parking">How many parking spaces do you need?
-    <input required type="number" id="parking" name="parking">
-  </label><div class="label">Do you work nights or odd hours?
+  <div class="flexrow">
+    <div>
+      <input required type="number" id="parking" name="parking">
+      <label for="parking">How many parking spaces do you need?</label>
+    </div><div class="largeFlex">
+      <input required type="text" id="lateBills" name="lateBills">
+      <label for="lateBills">In the last three years, how often did you pay bills late?</label>
+    </div>
+  </div>
+  <div class="label">Do you work nights or odd hours?
     <input required type="radio" id="oddHoursTrue" name="oddHours" value="Yes"><label for="oddHoursTrue" class="inline">Yes</label>
     <input required type="radio" id="oddHoursFalse" name="oddHours" value="No"><label for="oddHoursFalse" class="inline">No</label>
   </div><div class="label">Do you have frequent overnight guests?
@@ -266,9 +280,7 @@
   </div><div class="label">Do you have issues with community rules?
     <input required type="radio" id="againstRulesTrue" name="againstRules" value="Yes"><label for="againstRulesTrue" class="inline">Yes</label>
     <input required type="radio" id="againstRulesFalse" name="againstRules" value="No"><label for="againstRulesFalse" class="inline">No</label>
-  </div><label for="lateBills">In the last three years, how often did you pay bills late?
-    <input required type="text" id="lateBills" name="lateBills">
-  </label><div class="label">Have you ever been evicted or asked to move out?
+  </div><div class="label">Have you ever been evicted or asked to move out?
     <input required type="radio" id="evictedTrue" name="evicted" value="Yes"><label for="evictedTrue" class="inline">Yes</label>
     <input required type="radio" id="evictedFalse" name="evicted" value="No"><label for="evictedFalse" class="inline">No</label>
   </div><div class="label">Have you ever been sued for bills or been in collections
@@ -280,22 +292,42 @@
   </div>
 </div></section><section class="colored"><div>	
   <h1 class="articleTitle">Applicants Emergency Contacts and Personal References</h1>
-  <h3 class="articleTitle">Person 1</h3>
-    <label for="person1Name">Name:
-      <input required type="text" id="person1Name" name="person1Name">
-    </label><label for="person1Phone">Phone:
+  <h2 class="articleTitle">Person 1</h2>
+  <div class="flexrow">
+    <div>
+      <input required type="text" id="person1FirstName" name="person1FirstName">
+      <label for="person1FirstName">First Name</label>
+    </div><div>
+      <input required type="text" id="person1LastName" name="person1LastName">
+      <label for="person1LastName">Last Name</label>
+    </div>
+  </div><div class="flexrow">
+    <div>
       <input required type="tel" id="person1Phone" name="person1Phone">
-    </label><label for="person1Relationship">Relationship:
+      <label for="person1Phone">Phone Number</label>
+    </div><div class="largeFlex">
       <input required type="text" id="person1Relationship" name="person1Relationship">
-    </label>
-  <h3 class="articleTitle">Person 2</h3>
-    <label for="person2Name">Name:
-      <input required type="text" id="person2Name" name="person2Name">
-    </label><label for="person2Phone">Phone:
+      <label for="person1Relationship">Relationship</label>
+    </div>
+  </div>
+  <h2 class="articleTitle">Person 2</h2>
+  <div class="flexrow">
+    <div>
+      <input required type="text" id="person2FirstName" name="person2FirstName">
+      <label for="person2FirstName">First Name</label>
+    </div><div>
+      <input required type="text" id="person2LastName" name="person2LastName">
+      <label for="person2LastName">Last Name</label>
+    </div>
+  </div><div class="flexrow">
+    <div>
       <input required type="tel" id="person2Phone" name="person2Phone">
-    </label><label for="person2Relationship">Relationship:
+      <label for="person2Phone">Phone Number</label>
+    </div><div class="largeFlex">
       <input required type="text" id="person2Relationship" name="person2Relationship">
-    </label>
+      <label for="person2Relationship">Relationship</label>
+    </div>
+  </div>
 </div></section><section><div>	
   <h1 class="articleTitle">Authorization of Screening</h1>
   <p>I, the undersigned, hereby declare that the above information is true and correct, and has been made for the purpose of applying for residency. I acknowledges that false or omitted information may constitute as grounds for rejection of this application, termination of occupancy, and/or forfeiture of fees or deposits & may constitute as a criminal offense under the laws of this state.<br>I do hereby authorize a full consumer and characture investigation to evaluate my tenancy, including but not limited to contacting past and present landlords, employers, public records, and any other sources deemed necessary. I authorize said parties the release of information requested, & relinquish/hold harmless all parties for any & all damages or liabilities which might result through obtaining/providing said information.<br>In addition, I do hereby declare that a photocopy or pdf email of this document shall be as valid as the original, and will suffice as an authorized signature to release information on all my financial accounts related to this transaction. This investigation is for resident screening purposes only, and will remain private, secure, & confidential for all parties involved.</p>
@@ -303,11 +335,10 @@
     <input required type="checkbox" id="signAgreement" name="signAgreement" class="simple">
     <label for="signAgreement" style="display:inline">I have read and agree to the terms and conditions above</label>
   </div>
-  <label for="signature">Sign Name:
-    <input required type="text" id="signature" name="signature" class="fancySignature">
-  </label><label for="signDate">Date:
-    <input required type="date" id="signDate" name="signDate">
-  </label>
+  <input required type="text" id="signature" name="signature" class="fancySignature">
+  <label for="signature">Sign Name</label>
+  <input required type="date" id="signDate" name="signDate">
+  <label for="signDate">Date</label>
   <button type="button" id="submitButton">Submit</button>
 </div></section>
 
@@ -338,11 +369,12 @@
     for (i=0;i<incomeList.length;i++) { if (!isNaN(parseInt(incomeList[i].value))){totalIncome += parseInt(incomeList[i].value)} }
     document.querySelector("#totalIncome").innerHTML = totalIncome.toString();
   } 
-  for (i=0;i<incomeList.length;i++) {	incomeList[i].addEventListener("change",calculateIncome) }
+  for (i=0;i<incomeList.length;i++) {	incomeList[i].addEventListener("input",calculateIncome) }
   // Local Storage and Validation
   inputList = document.querySelectorAll("input:not([type='file'],#signDate,#signature),textarea");
   specialList = document.querySelectorAll("input[type='file'],input#signature");
-  for (i=0;i<specialList.length;i++) { specialList[i].addEventListener("change",event=>{validateInput(event.target)}) }
+  for (i=0;i<specialList.length;i++) { specialList[i].addEventListener("input",event=>{validateInput(event.target)}) }
+  for (i=0;i<inputList.length;i++) { inputList[i].addEventListener("input",event=>{validateInput(event.target)}) }
   for (i=0;i<inputList.length;i++) { 
     inputList[i].addEventListener("change",event => { changedInput = event.target;
       if (changedInput.type == "radio") {	name = changedInput.name; 
@@ -353,7 +385,6 @@
         finalValue = ""; let i=0;
         for (i=0;i<boxList.length;i++) { finalValue += boxList[i].value+"," }
       } else { localStorage.setItem(changedInput.name, changedInput.value) }
-      validateInput(changedInput);																							 
     })
   } 
   for (i=0;i<inputList.length;i++) { daInput = inputList[i];

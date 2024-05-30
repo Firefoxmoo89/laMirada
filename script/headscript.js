@@ -31,11 +31,11 @@ function mark(daInput,display="inline") {
 }
 function validateInput(daInput,display="inline") { 
 	if (daInput.required) {
-		daLabel = daInput.parentElement.querySelector("label[for='"+daInput.name+"']");
+		daLabel = daInput.parentElement.querySelector("label[for='"+daInput.id+"']");
 		if (daLabel.querySelector(".invalid") != null) { daLabel.querySelector(".invalid").remove() }
 		if (daInput.type == "radio" || daInput.type == "checkbox") { 
 			if (document.querySelector("input[name='"+daInput.name+"']:checked") == null) { mark(daInput,display); return false } 
-		} else if (daInput.type == "tel" && daInput.value.length<14) { mark (daInput,display); return false }
+		} else if (daInput.type == "tel" && daInput.value.length<12) { mark (daInput,display); return false }
 		else if (daInput.value=="") { mark(daInput,display); return false }	
 	} return true
 }

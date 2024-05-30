@@ -17,9 +17,10 @@ function daServer(request, response) {
       rad.servePage("apply",200,{},response);
     } else if (request.method == "POST") {
       formData = rad.processPOST(request,response,(formData) => {
-        mail.submittedApplication(formData);
-        response.writeHead(200,{});
-        response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
+        if (!mail.submittedApplication(formData)) {
+          response.writeHead(200,{});
+          response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
+        }
       });
     }
   }
