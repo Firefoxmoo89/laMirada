@@ -1,7 +1,8 @@
+require("./instrument.js");
 var http = require('http'); var url = require("url"); var fs = require("fs"); 
 var rad = require("./radicalModule.js"); var mail = require("./mail.js");
 
-http.createServer((request, response) => {
+function daServer(request, response) {
   deets = url.parse(request.url, true);
  
   if (deets.pathname == "/") {
@@ -18,9 +19,10 @@ http.createServer((request, response) => {
       rad.servePage("apply",200,{},response);
     } else if (request.method == "POST") {
       formData = rad.processPOST(request,response,(formData) => {
-        mail.submittedApplication(formData);
-        response.writeHead(200,{});
-        response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
+        if (!mail.submittedApplication(formData)) {
+          response.writeHead(200,{});
+          response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
+        }
       });
     }
   }
@@ -40,4 +42,8 @@ http.createServer((request, response) => {
   else {
     rad.servePage("missing",404,{},response);
   }
-}).listen(80);
+}
+
+http.createServer(daServer).listen(80);
+http.createServer(daServer).listen(3000);
+
