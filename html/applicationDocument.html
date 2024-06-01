@@ -1,108 +1,124 @@
-<table style="width:80%;margin:0 5% 0 5%" onclick="alert('trees are in the air')"><tbody>
+<head>
+
+<style>
+table { width: 80%; margin: auto }
+th { padding: 5px; border: 1px solid black; background-color:#C5D9F1; font-size: 1.2rem }
+td { padding: 5px; border: 1px solid black }
+span.label { font-size:0.8rem }
+span.field { font-weight: bold; font-size: 1.2rem }
+</style>
+
+</head><body>
+
+<table><tbody>
 	<tr>
-		<th colspan="3" style="padding:5px;border:1px solid black;background-color:#C5D9F1;font-size:1.2rem">Applicant's Information</th>
+		<th colspan="3">Applicant's Information</th>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"> <span style="font-size:0.8rem">First and Last Name</span><br><span style="font-weight:bold;font-size:1.2rem">%s %s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Phone</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black;width:50%"><span style="font-size:0.8rem">Email</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></th>
+		<td><span class="label">Name</span><br><span class="field">%s</span></td>
+		<td><span class="label">Phone</span><br><span class="field">%s</span></td>
+		<td style="padding:5px;border:1px solid black;width:50%"><span class="label">Email</span><br><span class="field">%s</span></th>
 	</tr>
-</tbody></table><table style="width:80%;margin:0 5% 0 5%"><tbody>
+</tbody></table><table><tbody>
 	<tr>
-		<td style="padding:5px;border:1px solid black;width:50%"><span style="font-size:0.8rem">Names of Other Adults</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Number of Children</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td style="padding:5px;border:1px solid black;width:50%"><span class="label">Names of Other Adults</span><br><span class="field">%s</span></td>
+		<td><span class="label">Number of Children</span><br><span class="field">%s</span></td>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Number and type(s) of Pets<br><span style="font-weight:bold;font-size:1.2rem">%s - %s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Number of occupants that smoke cigarettes or marijuana</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td><span class="label">Number and type(s) of Pets<br><span class="field">%s - %s</span></td>
+		<td><span class="label">Number of occupants that smoke cigarettes or marijuana</span><br><span class="field">%s</span></td>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">On a scale of 1-10, how are you as a tenant?</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">How much do you have saved for move-in costs?</span><br><span style="font-weight:bold;font-size:1.2rem">$%s</span></td>
+		<td><span class="label">On a scale of 1-10, how are you as a tenant?</span><br><span class="field">%s</span></td>
+		<td><span class="label">How much do you have saved for move-in costs?</span><br><span class="field">$%s</span></td>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">How did you hear about us?</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Desired Move-In Date</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td><span class="label">How did you hear about us?</span><br><span class="field">%s</span></td>
+		<td><span class="label">Desired Move-In Date</span><br><span class="field">%s</span></td>
 	</tr>
-</tbody></table><table style="width:80%;margin:0 5% 0 5%"><tbody>
+</tbody></table><table><tbody>
 	<tr>
-		<th colspan="6" style="padding:5px;border:1px solid black;background-color:#C5D9F1;font-size:1.2rem">Applicant's Rental History</th>
+		<th colspan="6">Applicant's Rental History</th>
 	</tr><tr>
-		<td colspan="3" style="padding:5px;border:1px solid black;width:50%"><span style="font-size:0.8rem">Current Address</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td colspan="3" style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Prior Address</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td colspan="3" style="padding:5px;border:1px solid black;width:50%"><span class="label">Current Address</span><br><span class="field">%s</span></td>
+		<td colspan="3" style="padding:5px;border:1px solid black"><span class="label">Prior Address</span><br><span class="field">%s</span></td>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Date Moved In</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Date Moved Out</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Monthly Rent</span><br><span style="font-weight:bold;font-size:1.2rem">$%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Date Moved In</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Date Moved Out</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Monthly Rent</span><br><span style="font-weight:bold;font-size:1.2rem">$%s</span></td>
+		<td><span class="label">Date Moved In</span><br><span class="field">%s</span></td>
+		<td><span class="label">Date Moved Out</span><br><span class="field">%s</span></td>
+		<td><span class="label">Monthly Rent</span><br><span class="field">$%s</span></td>
+		<td><span class="label">Date Moved In</span><br><span class="field">%s</span></td>
+		<td><span class="label">Date Moved Out</span><br><span class="field">%s</span></td>
+		<td><span class="label">Monthly Rent</span><br><span class="field">$%s</span></td>
 	</tr><tr>
-		<td colspan="2" style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">LandLord Name</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">LandLord Phone</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td colspan="2" style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">LandLord Name</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">LandLord Phone</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td colspan="2" style="padding:5px;border:1px solid black"><span class="label">LandLord Name</span><br><span class="field">%s</span></td>
+		<td><span class="label">LandLord Phone</span><br><span class="field">%s</span></td>
+		<td colspan="2" style="padding:5px;border:1px solid black"><span class="label">LandLord Name</span><br><span class="field">%s</span></td>
+		<td><span class="label">LandLord Phone</span><br><span class="field">%s</span></td>
 	</tr><tr>
-		<td colspan="3" style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Reason For Leaving</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td colspan="3" style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Reason For Leaving</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td colspan="3" style="padding:5px;border:1px solid black"><span class="label">Reason For Leaving</span><br><span class="field">%s</span></td>
+		<td colspan="3" style="padding:5px;border:1px solid black"><span class="label">Reason For Leaving</span><br><span class="field">%s</span></td>
 	</tr>
-</tbody></table><table style="width:80%;margin:0 5% 0 5%"><tbody>
+</tbody></table><table><tbody>
 	<tr>
-		<th colspan="6" style="padding:5px;border:1px solid black;background-color:#C5D9F1;font-size:1.2rem">Applicant's Income History</th>
+		<th colspan="6">Applicant's Income History</th>
 	</tr><tr>
-		<td colspan="2" style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">1) Employer/Comany Name</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td colspan="2" style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Occupation/Industry</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">City, State</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Position Title</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td colspan="2" style="padding:5px;border:1px solid black"><span class="label">1) Employer/Comany Name</span><br><span class="field">%s</span></td>
+		<td colspan="2" style="padding:5px;border:1px solid black"><span class="label">Occupation/Industry</span><br><span class="field">%s</span></td>
+		<td><span class="label">City, State</span><br><span class="field">%s</span></td>
+		<td><span class="label">Position Title</span><br><span class="field">%s</span></td>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Supervisor Name</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Supervisor Phone</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Hrs / Weeks</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Start Date</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">End Date</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Monthly Salary</span><br><span style="font-weight:bold;font-size:1.2rem">$%s</span></td>
+		<td><span class="label">Supervisor Name</span><br><span class="field">%s</span></td>
+		<td><span class="label">Supervisor Phone</span><br><span class="field">%s</span></td>
+		<td><span class="label">Hrs / Weeks</span><br><span class="field">%s</span></td>
+		<td><span class="label">Start Date</span><br><span class="field">%s</span></td>
+		<td><span class="label">End Date</span><br><span class="field">%s</span></td>
+		<td><span class="label">Monthly Salary</span><br><span class="field">$%s</span></td>
 	</tr><tr>
-		<td colspan="2" style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">2) Employer/Comany Name</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td colspan="2" style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Occupation/Industry</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">City, State</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Position Title</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td colspan="2" style="padding:5px;border:1px solid black"><span class="label">2) Employer/Comany Name</span><br><span class="field">%s</span></td>
+		<td colspan="2" style="padding:5px;border:1px solid black"><span class="label">Occupation/Industry</span><br><span class="field">%s</span></td>
+		<td><span class="label">City, State</span><br><span class="field">%s</span></td>
+		<td><span class="label">Position Title</span><br><span class="field">%s</span></td>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Supervisor Name</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Supervisor Phone</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Hrs / Weeks</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Start Date</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">End Date</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Monthly Salary</span><br><span style="font-weight:bold;font-size:1.2rem">$%s</span></td>
+		<td><span class="label">Supervisor Name</span><br><span class="field">%s</span></td>
+		<td><span class="label">Supervisor Phone</span><br><span class="field">%s</span></td>
+		<td><span class="label">Hrs / Weeks</span><br><span class="field">%s</span></td>
+		<td><span class="label">Start Date</span><br><span class="field">%s</span></td>
+		<td><span class="label">End Date</span><br><span class="field">%s</span></td>
+		<td><span class="label">Monthly Salary</span><br><span class="field">$%s</span></td>
 	</tr><tr>
-		<td style="text-align:right">Other Income:</td>
-		<td colspan="3" style="font-weight:bold;font-size:1.2rem">%s</td>
-		<td style="text-align:right">Other Monthly Income Amount</td>
-		<td style="padding:5px;border:1px solid black;font-weight:bold;font-size:1.2rem">$%s</td>
+		<td class="label" style="text-align:right">Other Income:</td>
+		<td colspan="3" class="field">%s</td>
+		<td class="label" style="text-align:right">Other Monthly Income Amount</td>
+		<td class="field">$%s</td>
 	</tr><tr>
-		<td colspan="5" style="text-align:right">Total Current Monthly Income from All Income Sources</td>
-		<td style="padding:5px;border:1px solid black;font-weight:bold;font-size:1.2rem">$%s</td>
+		<td colspan="5" class="label" style="text-align:right">Total Current Monthly Income from All Income Sources</td>
+		<td class="field">$%s</td>
 	</tr>
-</tbody></table><table style="width:80%;margin:0 5% 0 5%"><tbody>
+</tbody></table><table><tbody>
 	<tr>
-		<th colspan="2" style="padding:5px;border:1px solid black;background-color:#C5D9F1;font-size:1.2rem">Other Information</th>
+		<th colspan="2">Other Information</th>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black;width:50%"><span style="font-size:0.8rem">How many parking spaces do you need?</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">In the last 3 years, how often did you pay bills late?</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td style="padding:5px;border:1px solid black;width:50%"><span class="label">How many parking spaces do you need?</span><br><span class="field">%s</span></td>
+		<td><span class="label">In the last 3 years, how often did you pay bills late?</span><br><span class="field">%s</span></td>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Do you work nights or odd hours?</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Have you ever been evicted or asked to move out?</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td><span class="label">Do you work nights or odd hours?</span><br><span class="field">%s</span></td>
+		<td><span class="label">Have you ever been evicted or asked to move out?</span><br><span class="field">%s</span></td>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Do you have frequent overnight guests?</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Have you been sued for bills or been in collections?</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td><span class="label">Do you have frequent overnight guests?</span><br><span class="field">%s</span></td>
+		<td><span class="label">Have you been sued for bills or been in collections?</span><br><span class="field">%s</span></td>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Do you have issues with community rules?</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Have you informed your current landlord that you're moving?</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td><span class="label">Do you have issues with community rules?</span><br><span class="field">%s</span></td>
+		<td><span class="label">Have you informed your current landlord that you're moving?</span><br><span class="field">%s</span></td>
 	</tr>
-</tbody></table><table style="width:80%;margin:0 5% 0 5%"><tbody>
+</tbody></table><table><tbody>
 	<tr>
-		<th colspan="6" style="padding:5px;border:1px solid black;background-color:#C5D9F1;font-size:1.2rem">Applicant's Emergency Contacts and Personal References</th>
+		<th colspan="6">Applicant's Emergency Contacts and Personal References</th>
 	</tr><tr>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">1) Name</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Phone</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Relationship</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">2) Name</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Phone</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
-		<td style="padding:5px;border:1px solid black"><span style="font-size:0.8rem">Relationship</span><br><span style="font-weight:bold;font-size:1.2rem">%s</span></td>
+		<td><span class="label">1) Name</span><br><span class="field">%s</span></td>
+		<td><span class="label">Phone</span><br><span class="field">%s</span></td>
+		<td><span class="label">Relationship</span><br><span class="field">%s</span></td>
+		<td><span class="label">2) Name</span><br><span class="field">%s</span></td>
+		<td><span class="label">Phone</span><br><span class="field">%s</span></td>
+		<td><span class="label">Relationship</span><br><span class="field">%s</span></td>
 	</tr>
-</tbody></table>
+</tbody></table><div style="padding: 25px 20%">
+	<div style="float:left"><span class="label">Signature: </span><span class="field">%s</span></div>
+	<div style="float:right"><span class="label">Sign Date: </span><span class="field">%s</span></div>
+</div>
+</body>

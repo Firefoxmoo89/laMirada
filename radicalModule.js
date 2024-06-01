@@ -23,7 +23,7 @@ exports.servePage = (page,status,headers,response) => {
 exports.processPOST = (request,response,daFunction) => {
   var filenameList = [];
   var form = new formidable.IncomingForm({
-    multiples: true, uploadDir: "temp/", maxFileSize: 50 * 1024 * 1024, keepExtensions: true, 
+    multiples: true, uploadDir: "temp/", maxFileSize: 500 * 1024 * 1024, keepExtensions: true, 
     filename: (name, ext, part, form) => { 
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; newName = "";
       for (let i=0;i<16;i++) { newName += characters.charAt(Math.floor(Math.random()*characters.length)) }
@@ -32,9 +32,10 @@ exports.processPOST = (request,response,daFunction) => {
     }
   }); 
   form.parse(request, function (parseError, fields, files) {
-    if (parseError) { 
+    if (parseError) { console.log(parseError);
       response.writeHead(400,{}); 
-      response.end(JSON.stringify({"response":"Image uploads failed; please check the validity of your images"})) 
+      response.end(JSON.stringify({"response":"Image uploads failed; please check the validity of your images"}));
+      return false 
     }
     formData = {};
     for (var key of Object.keys(fields)) { formData[key] = fields[key][0] }

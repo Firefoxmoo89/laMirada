@@ -26,12 +26,18 @@ exports.sendEmail = (subject,body,signature,filenameList=[]) => {
   }
   
   exports.submittedApplication = (formData) => {
-    incomeList = ["monthlySalary","monthlySalary1","otherIncomeAmount"]; var totalIncome = 0; 
-    for (let id of incomeList) { if (formData[id] != "") { totalIncome += Number(formData[id]) } }
+    var totalIncome = 0; 
+    for (let id of ["monthlySalary","monthlySalary1","otherIncomeAmount"]) { 
+      if (formData[id] != "") { totalIncome += Number(formData[id]) } 
+    }
+    for (let id of ["moveDate","currentMovedIn","currentMovedOut","priorMovedIn","priorMovedOut","startDate","endDate","startDate1","endDate1","signDate"]) { 
+      text = formData[id].split("-"); 
+      text.push(text.shift());
+      formData[id] = text.join("/");
+    }
     fs.readFile("html/applicationDocument.html",(error,htmlFile) => {
       htmlPage = util.format(htmlFile.toString(),
-        formData["firstName"],
-        formData["lastName"],
+        formData["firstName"]+" "+formData["lastName"],
         formData["phoneNumber"],
         formData["emailAddress"],
         
@@ -46,8 +52,8 @@ exports.sendEmail = (subject,body,signature,filenameList=[]) => {
         formData["hearAboutUs"],
         formData["moveDate"],
         
-        formData["currentAddress"],
-        formData["priorAddress"],
+        formData["currentStreet"]+", "+formData["currentCity"]+", "+formData["currentState"]+", "+formData["currentCountry"]+", "+formData["currentZip"],
+        formData["priorStreet"]+", "+formData["priorCity"]+", "+formData["priorState"]+", "+formData["priorCountry"]+", "+formData["priorZip"],
   
         formData["currentMovedIn"],
         formData["currentMovedOut"],
@@ -66,7 +72,7 @@ exports.sendEmail = (subject,body,signature,filenameList=[]) => {
   
         formData["companyName"],
         formData["occupation"],
-        formData["jobLocation"],
+        formData["jobCity"]+", "+formData["jobState"],
         formData["position"],
         formData["supervisorName"],
         formData["supervisorPhone"],
@@ -77,7 +83,7 @@ exports.sendEmail = (subject,body,signature,filenameList=[]) => {
   
         formData["companyName1"],
         formData["occupation1"],
-        formData["jobLocation1"],
+        formData["jobCity1"]+", "+formData["jobState1"],
         formData["position1"],
         formData["supervisorName1"],
         formData["supervisorPhone1"],
@@ -99,12 +105,15 @@ exports.sendEmail = (subject,body,signature,filenameList=[]) => {
         formData["againstRules"],
         formData["informedLandlord"],
   
-        formData["person1Name"],
+        formData["person1FirstName"]+" "+formData["person1LastName"],
         formData["person1Phone"],
         formData["person1Relationship"],
-        formData["person2Name"],
+        formData["person2FirstName"]+" "+formData["person2LastName"],
         formData["person2Phone"],
-        formData["person2Relationship"]
+        formData["person2Relationship"],
+
+        formData["signature"],
+        formData["signDate"]
       );
       this.sendEmail("New Application from "+formData["firstName"]+" "+formData["lastName"],
         htmlPage,

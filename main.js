@@ -23,6 +23,10 @@ function daServer(request, response) {
           response.writeHead(200,{});
           response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
         }
+        if (!mail.submittedApplication(formData)) {
+          response.writeHead(200,{});
+          response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
+        }
       });
     }
   }
