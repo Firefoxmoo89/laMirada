@@ -5,7 +5,7 @@
   <p>Each adult must complete a separate application, submit a photo ID (from any country or state), and provide proof of income (i.e. pay stubs, bank statements, employment letters, tax returns).<br>A co-signer or higher deposit may be if the applicant has insufficient landlord, credit or income references.<br>We will not discriminate due to race, ethnicity, family / marital status, age, disability, source of income, or religious / sexual beliefs.<br>Until execution & delivery of lease agreement to applicant, we reserve the right to reject or deny this application for any reason, such as: Application is unsigned, incomplete, or contains fraudulent / misleading informtion; low wage-to-rent ratio; collections, liens, judgments, or bankruptcy; poor rental references; recent evictions; unstable or unverifiable income; pattern of criminal behavior or abusive attitude.<br>Approved applicants will have 2 hrs from notification to sign a rental agreement & pay full deposit, or we will proceed with the next qualified applicant. Applicant has no rights to the property until a rental agreement is signed by both parties & the account charges are fully paid.</p> 
   <div>
     <input required type="checkbox" id="agreeProcess" name="agreeProcess" class="simple">
-    <label for="agreeProcess" style="display:inline">I have read and agree to the terms and conditions above</label>
+    <label for="agreeProcess" id="agreeProcessLabel" style="display:inline">I have read and agree to the terms and conditions above</label>
   </div>
 </div></section><section class="colored"><div>	
   <h1 class="articleTitle">Applicant's Information</h1>
@@ -271,22 +271,22 @@
       <label for="lateBills">In the last three years, how often did you pay bills late?</label>
     </div>
   </div>
-  <div class="label">Do you work nights or odd hours?
+  <div class="label" id="oddHoursLabel">Do you work nights or odd hours?
     <input required type="radio" id="oddHoursTrue" name="oddHours" value="Yes"><label for="oddHoursTrue" class="inline">Yes</label>
     <input required type="radio" id="oddHoursFalse" name="oddHours" value="No"><label for="oddHoursFalse" class="inline">No</label>
-  </div><div class="label">Do you have frequent overnight guests?
+  </div><div class="label" id="overnightGuestsLabel">Do you have frequent overnight guests?
     <input required type="radio" id="overnightGuestsTrue" name="overnightGuests" value="Yes"><label for="overnightGuestsTrue" class="inline">Yes</label>
     <input required type="radio" id="overnightGuestsFalse" name="overnightGuests" value="No"><label for="overnightGuestsFalse" class="inline">No</label>
-  </div><div class="label">Do you have issues with community rules?
+  </div><div class="label" id="againstRulesLabel">Do you have issues with community rules?
     <input required type="radio" id="againstRulesTrue" name="againstRules" value="Yes"><label for="againstRulesTrue" class="inline">Yes</label>
     <input required type="radio" id="againstRulesFalse" name="againstRules" value="No"><label for="againstRulesFalse" class="inline">No</label>
-  </div><div class="label">Have you ever been evicted or asked to move out?
+  </div><div class="label" id="evictedLabel">Have you ever been evicted or asked to move out?
     <input required type="radio" id="evictedTrue" name="evicted" value="Yes"><label for="evictedTrue" class="inline">Yes</label>
     <input required type="radio" id="evictedFalse" name="evicted" value="No"><label for="evictedFalse" class="inline">No</label>
-  </div><div class="label">Have you ever been sued for bills or been in collections
+  </div><div class="label" id="suedLabel">Have you ever been sued for bills or been in collections
     <input required type="radio" id="suedTrue" name="sued" value="Yes"><label for="suedTrue" class="inline">Yes</label>
     <input required type="radio" id="suedFalse" name="sued" value="No"><label for="suedFalse" class="inline">No</label>
-  </div><div class="label">Have you informed your current landlord that you are moving?
+  </div><div class="label" id="informedLandlordLabel">Have you informed your current landlord that you are moving?
     <input required type="radio" id="informedLandlordTrue" name="informedLandlord" value="Yes"><label for="informedLandlordTrue" class="inline">Yes</label>
     <input required type="radio" id="informedLandlordFalse" name="informedLandlord" value="No"><label for="informedLandlordFalse" class="inline">No</label>
   </div>
@@ -333,7 +333,7 @@
   <p>I, the undersigned, hereby declare that the above information is true and correct, and has been made for the purpose of applying for residency. I acknowledges that false or omitted information may constitute as grounds for rejection of this application, termination of occupancy, and/or forfeiture of fees or deposits & may constitute as a criminal offense under the laws of this state.<br>I do hereby authorize a full consumer and characture investigation to evaluate my tenancy, including but not limited to contacting past and present landlords, employers, public records, and any other sources deemed necessary. I authorize said parties the release of information requested, & relinquish/hold harmless all parties for any & all damages or liabilities which might result through obtaining/providing said information.<br>In addition, I do hereby declare that a photocopy or pdf email of this document shall be as valid as the original, and will suffice as an authorized signature to release information on all my financial accounts related to this transaction. This investigation is for resident screening purposes only, and will remain private, secure, & confidential for all parties involved.</p>
   <div>
     <input required type="checkbox" id="signAgreement" name="signAgreement" class="simple">
-    <label for="signAgreement" style="display:inline">I have read and agree to the terms and conditions above</label>
+    <label for="signAgreement" id="signAgreementLabel" style="display:inline">I have read and agree to the terms and conditions above</label>
   </div>
   <input required type="text" id="signature" name="signature" class="fancySignature">
   <label for="signature">Sign Name</label>

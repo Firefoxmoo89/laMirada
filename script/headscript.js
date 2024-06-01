@@ -23,20 +23,17 @@ async function fetchadids(source, options, daFunction) {
 	.then(data => { daFunction(data) })
 }
 
-function mark(daInput,display="inline") {
-	daLabel = daInput.parentElement.querySelector("label[for='"+daInput.name+"']");
-	invalidSpan = document.createElement("span"); invalidSpan.innerHTML = "*Required";
-	invalidSpan.setAttribute("class","invalid"); invalidSpan.style.display = display;
-	if (daLabel.querySelector(".invalid")==null) { daLabel.appendChild(invalidSpan) }
-}
-function validateInput(daInput,display="inline") { 
+function validateInput(daInput,display="inline") {
 	if (daInput.required) {
-		daLabel = daInput.parentElement.querySelector("label[for='"+daInput.id+"']");
+		invalidSpan = document.createElement("span"); invalidSpan.innerHTML = "*Required";invalidSpan.setAttribute("class","invalid"); invalidSpan.style.display = display;
+		daLabel = document.querySelector("label[for='"+daInput.id+"']");
 		if (daLabel.querySelector(".invalid") != null) { daLabel.querySelector(".invalid").remove() }
-		if (daInput.type == "radio" || daInput.type == "checkbox") { 
-			if (document.querySelector("input[name='"+daInput.name+"']:checked") == null) { mark(daInput,display); return false } 
-		} else if (daInput.type == "tel" && daInput.value.length<12) { mark (daInput,display); return false }
-		else if (daInput.value=="") { mark(daInput,display); return false }	
+		if (daInput.type == "radio" || daInput.type == "checkbox") {
+			if (document.querySelector("input[name='"+daInput.name+"']:checked") == null && document.querySelector("#"+daInput.name+"Label").querySelector(".invalid") == null) { 
+				document.querySelector("#"+daInput.name+"Label").appendChild(invalidSpan); return false 
+			}
+		} else if (daInput.type == "tel" && daInput.value.length<12) { daLabel.appendChild(invalidSpan); return false }
+		else if (daInput.value=="") { daLabel.appendChild(invalidSpan); return false }	
 	} return true
 }
 function validateInputs(parentElement=document,display="inline",selectors="input[required],textarea[required],select[required]") { 
