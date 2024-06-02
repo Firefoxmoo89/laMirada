@@ -30,11 +30,10 @@ function validateInput(daInput,display="inline") {
 		if (daLabel.querySelector(".invalid") != null) { daLabel.querySelector(".invalid").remove();trash=true }
 		if (daInput.type == "radio" || daInput.type == "checkbox") {
 			daLabel = document.querySelector("#"+daInput.name+"Label");
-			console.log(daInput,"checked", document.querySelector("input[name='"+daInput.name+"']:checked") != null,"has label", document.querySelector("#"+daInput.name+"Label").querySelector(".invalid") != null);
 			if (document.querySelector("input[name='"+daInput.name+"']:checked") == null) { 
 				if (document.querySelector("#"+daInput.name+"Label").querySelector(".invalid") == null) {
-				document.querySelector("#"+daInput.name+"Label").appendChild(newInvalid); return false; console.log("duck",document.querySelector("#"+daInput.name+"Label").querySelector(".invalid") == null);
-				} else {console.log("sup")} 
+				document.querySelector("#"+daInput.name+"Label").appendChild(newInvalid); return false
+				}
 			} else if (document.querySelector("#"+daInput.name+"Label").querySelector(".invalid")!=null) { document.querySelector("#"+daInput.name+"Label").querySelector(".invalid").remove() }
 		} else if (daInput.type == "tel" && daInput.value.length<12) { daLabel.appendChild(newInvalid); return false }
 		else if (daInput.value=="") { daLabel.appendChild(newInvalid); return false }	
