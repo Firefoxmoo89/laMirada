@@ -22,18 +22,22 @@ async function fetchadids(source, options, daFunction) {
 	.then(response => response.json())
 	.then(data => { daFunction(data) })
 }
-
+invalidSpan = document.createElement("span"); invalidSpan.innerHTML = "*Required";invalidSpan.setAttribute("class","invalid"); 
 function validateInput(daInput,display="inline") {
 	if (daInput.required) {
-		invalidSpan = document.createElement("span"); invalidSpan.innerHTML = "*Required";invalidSpan.setAttribute("class","invalid"); invalidSpan.style.display = display;
+		newInvalid = invalidSpan.cloneNode(true); newInvalid.style.display = display;
 		daLabel = document.querySelector("label[for='"+daInput.id+"']");
-		if (daLabel.querySelector(".invalid") != null) { daLabel.querySelector(".invalid").remove() }
+		if (daLabel.querySelector(".invalid") != null) { daLabel.querySelector(".invalid").remove();trash=true }
 		if (daInput.type == "radio" || daInput.type == "checkbox") {
-			if (document.querySelector("input[name='"+daInput.name+"']:checked") == null && document.querySelector("#"+daInput.name+"Label").querySelector(".invalid") == null) { 
-				document.querySelector("#"+daInput.name+"Label").appendChild(invalidSpan); return false 
-			}
-		} else if (daInput.type == "tel" && daInput.value.length<12) { daLabel.appendChild(invalidSpan); return false }
-		else if (daInput.value=="") { daLabel.appendChild(invalidSpan); return false }	
+			daLabel = document.querySelector("#"+daInput.name+"Label");
+			console.log(daInput,"checked", document.querySelector("input[name='"+daInput.name+"']:checked") != null,"has label", document.querySelector("#"+daInput.name+"Label").querySelector(".invalid") != null);
+			if (document.querySelector("input[name='"+daInput.name+"']:checked") == null) { 
+				if (document.querySelector("#"+daInput.name+"Label").querySelector(".invalid") == null) {
+				document.querySelector("#"+daInput.name+"Label").appendChild(newInvalid); return false; console.log("duck",document.querySelector("#"+daInput.name+"Label").querySelector(".invalid") == null);
+				} else {console.log("sup")} 
+			} else if (document.querySelector("#"+daInput.name+"Label").querySelector(".invalid")!=null) { document.querySelector("#"+daInput.name+"Label").querySelector(".invalid").remove() }
+		} else if (daInput.type == "tel" && daInput.value.length<12) { daLabel.appendChild(newInvalid); return false }
+		else if (daInput.value=="") { daLabel.appendChild(newInvalid); return false }	
 	} return true
 }
 function validateInputs(parentElement=document,display="inline",selectors="input[required],textarea[required],select[required]") { 
