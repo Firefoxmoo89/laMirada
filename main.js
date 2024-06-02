@@ -44,7 +44,6 @@ function daServer(request, response) {
   else if (deets.pathname.includes("/script")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/javascript"},response) }
   else if (deets.pathname.includes("/image")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"image/png"},response) }
   else if (deets.pathname == "/sitemap.xml") { rad.serveFile("sitemap.xml",200,{},response) }
-  else if (deets.pathname == "/github") { response.writeHead(301, { Location: "https://github.com/Firefoxmoo89/lamirada"}); response.end() }
   else { rad.servePage("missing",404,{},response) }
 }
 
