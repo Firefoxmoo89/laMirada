@@ -18,12 +18,12 @@ function daServer(request, response) {
     if (request.method == "GET") {
       rad.servePage("apply",200,{},response);
     } else if (request.method == "POST") {
-      formData = rad.processPOST(request,response,(formData) => {
-        if (!mail.submittedApplication(formData)) {
-          response.writeHead(200,{});
-          response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
-        }
-        if (!mail.submittedApplication(formData)) {
+      formData = rad.processPOST(request,response,(formData,error) => {
+        if (error) {
+          response.writeHead(400,{}); 
+          response.end(JSON.stringify({"response":"Image uploads failed; please check the validity of your images"}));
+        } else {
+          mail.submittedApplication(formData);
           response.writeHead(200,{});
           response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
         }
