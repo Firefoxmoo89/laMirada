@@ -22,6 +22,7 @@ async function fetchadids(source, options, daFunction) {
 	.then(response => response.json())
 	.then(data => { daFunction(data) })
 }
+
 invalidSpan = document.createElement("span"); invalidSpan.innerHTML = "*Required";invalidSpan.setAttribute("class","invalid"); 
 function validateInput(daInput,display="inline") {
 	if (daInput.required) {
@@ -29,15 +30,15 @@ function validateInput(daInput,display="inline") {
 		daLabel = document.querySelector("label[for='"+daInput.id+"']");
 		if (daLabel.querySelector(".invalid") != null) { daLabel.querySelector(".invalid").remove() }
 		if (daInput.type == "radio" || daInput.type == "checkbox") {
-			daLabel = document.querySelector("#"+daInput.name+"Label");
+			daLabel = document.querySelector("#"+daInput.name+"Label"); if (daLabel == null) {console.error(daInput)}
 			if (document.querySelector("input[name='"+daInput.name+"']:checked") == null) { 
-				if (document.querySelector("#"+daInput.name+"Label").querySelector(".invalid") == null) {
-				document.querySelector("#"+daInput.name+"Label").appendChild(newInvalid); return false
+				if (daLabel.querySelector(".invalid") == null) {
+				daLabel.appendChild(newInvalid); return false
 				}
-			} else if (document.querySelector("#"+daInput.name+"Label").querySelector(".invalid")!=null) { document.querySelector("#"+daInput.name+"Label").querySelector(".invalid").remove() }
+			} else if (daLabel.querySelector(".invalid")!=null) { daLabel.querySelector(".invalid").remove() }
 		} else if (daInput.type == "tel" && daInput.value.length<12) { daLabel.appendChild(newInvalid); return false }
-		else if (daInput.value=="") { console.log(daInput); daLabel.appendChild(newInvalid); return false }	
-	} return true; console.log(true);
+		else if (daInput.value=="") { daLabel.appendChild(newInvalid); return false }	
+	} return true
 }
 function validateInputs(parentElement=document,display="inline",selectors="input[required],textarea[required],select[required]") { 
 	inputList = parentElement.querySelectorAll(selectors); validParent = true; var i;
@@ -59,3 +60,14 @@ function submitForm(source, daFunction, selectors="input:not([data-submitform='i
 	} 
 	fetchadids(source, { method: "POST", body: daFormData }, daFunction);
 }
+
+Sentry.init({
+	dsn: "https://498e2ebd4b903ec474a61ad56721a3e6@o4507343182888960.ingest.us.sentry.io/4507343186165760",
+	beforeSend(event, hint) {
+		// Check if it is an exception, and if so, show the report dialog
+		if (event.exception && event.event_id) {
+			Sentry.showReportDialog({ eventId: event.event_id });
+		}
+		return event;
+	},
+});
