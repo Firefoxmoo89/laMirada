@@ -61,8 +61,15 @@ function submitForm(source, daFunction, selectors="input:not([data-submitform='i
 	fetchadids(source, { method: "POST", body: daFormData }, daFunction);
 }
 
+import * as Sentry from '@sentry/browser';
+import { CaptureConsole } from '@sentry/integrations';
 Sentry.init({
 	dsn: "https://498e2ebd4b903ec474a61ad56721a3e6@o4507343182888960.ingest.us.sentry.io/4507343186165760",
+	integrations: [
+    new CaptureConsole({
+      levels: ['error']
+    })
+  ],
 	beforeSend(event, hint) {
 		// Check if it is an exception, and if so, show the report dialog
 		if (event.exception && event.event_id) {
