@@ -2,6 +2,19 @@ require("./instrument.js");
 var http = require('http'); var url = require("url"); var fs = require("fs"); 
 var rad = require("./radicalModule.js"); var mail = require("./mail.js");
 
+/*
+datetime = new Date(); datetime = datetime.toISOString().slice(0,19).replaceAll(":",""); console.log("datetime",datetime);
+for (html of ["top.html","bottom.html"]) { console.log("html",html);
+  content = fs.readFileSync("html/"+html,"utf8");
+  for (location of ["script","style"]) { console.log("location",location);
+    files = fs.readdirSync(location); console.log("files",files);
+    for (daFile of files) { console.log("daFile",daFile);
+      daIndex = content.indexOf(daFile)+daFile.length
+    }
+  }
+  fs.writeFileSync("html/"+html,content);
+}
+*/
 function daServer(request, response) {
   deets = url.parse(request.url, true);
  
@@ -42,7 +55,9 @@ function daServer(request, response) {
         } else {
         mail.sendEmail("Inquiry from "+formData.firstName+" "+formData.lastName,formData.body,"<br>Email: "+formData.daAddress+"<br>Number: "+formData.daNumber+"<br>Prefers: "+formData.contactMethod);
         response.writeHead(200,{});
-      response.end(JSON.stringify({"response":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
+        response.end(JSON.stringify({"response":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
+        }
+      });
     }
   }
   else if (deets.pathname.includes("/style")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/css"},response) }
