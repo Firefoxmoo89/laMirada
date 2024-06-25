@@ -18,7 +18,7 @@ function daServer(request, response) {
     if (request.method == "GET") {
       rad.servePage("apply",200,{},response);
     } else if (request.method == "POST") {
-      formData = rad.processPOST(request,response,(formData,error) => {
+      formData = rad.processPOST(request,(formData,error) => {
         if (error) {
           response.writeHead(400,{}); 
           response.end(JSON.stringify({"response":"Image uploads failed; please check the validity of your images"}));
@@ -34,9 +34,14 @@ function daServer(request, response) {
     if (request.method == "GET") {
       rad.servePage("contact",200,{},response);
     } else if (request.method == "POST") {
-      formData = rad.processPOST(request,(formData) => {
-        mail.sendEmail("Inquiry from "+formData.daName,formData.body,formData.daName+"<br>Email: "+formData.daAddress+"<br>Number: "+formData.daNumber+"<br>Prefers: "+formData.contactMethod);
-      });
+      formData = rad.processPOST(request,(formData,error) => { 
+        if (error) { 
+          response.writeHead(400,{});
+          response.end(JSON.stringify({"response":"An error has occured and the form could not be submitted"}));
+          throw error;
+        } else {
+        mail.sendEmail("Inquiry from "+formData.firstName+" "+formData.lastName,formData.body,"<br>Email: "+formData.daAddress+"<br>Number: "+formData.daNumber+"<br>Prefers: "+formData.contactMethod);
+        response.writeHead(200,{});
       response.end(JSON.stringify({"response":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
     }
   }

@@ -1,18 +1,21 @@
 <script>document.title += " - Contact"</script>
 
 <section id="form"><div>
-  <label for="daName">What is your name?
-    <input required type="text" id="daName" name="daName" placeholder="John Doe" value="">
-  </label><label for="daAddress">What is your email address? 
-    <input required type="email" id="daAddress" name="daAddress" placeholder="example@email.com" value="">
-  </label><label for="daNumber">What is your phone number?
-    <input required type="tel" id="daNumber" name="daNumber" placeholder="(555) 555-5555" value="">
-  </label><div class="label">Which contact method would you prefer?
-    <input required type="radio" id="text" name="contactMethod" value="text"><label for="text">Text Message</label>
-    <input required type="radio" id="email" name="contactMethod" value="email"><label for="email">Email</label>
-  </div><label for="body">What is your message?
-    <textarea required id="body" name="body"></textarea>
-  </label>
+  <div class="flexrow">
+    <div>
+      <input required type="text" id="firstName" name="firstName" placeholder="John">
+      <label for="firstName">First Name</label>
+    </div><div>
+      <input required type="text" id="lastName" name="lastName" placeholder="Doe">
+      <label for="lastName">Last Name</label>
+    </div>
+  </div>
+  <input required type="email" id="daAddress" name="daAddress" placeholder="example@email.com"><label for="daAddress">Email Address</label>
+  <input required type="tel" id="daNumber" name="daNumber" placeholder="(555) 555-5555" autocomplete="off" autofill="off"><label for="daNumber">Phone Number</label>
+  <input required type="radio" id="text" name="contactMethod" value="text"><label for="text">Text Message</label>
+  <input required type="radio" id="email" name="contactMethod" value="email"><label for="email">Email</label>
+  <div class="label" id="contactMethodLabel">Which contact method would you prefer?</div>
+  <textarea required id="body" name="body"></textarea><label for="body">Message Body</label>
   <button type="button" id="submitButton" style="background-color:green;margin-top:25px">Submit</button>
 </div></section>
 
@@ -21,13 +24,15 @@
 <script>
   submitButton = document.querySelector("#submitButton");
   submitButton.addEventListener("click",event => {
-    if (validateInputs()) { 
-      toggleProcessCursor(document.documentElement); submitButton.innerHTML = "...";
-      submitForm("/contact",data => {
-        alert(data["response"]);
-        toggleProcessCursor(document.documentElement);
-        submitButton.innerHTML = "Submit";
+    ready = validateInputs(document.querySelector("#main")); 
+    if (!ready) { alert("The form is not ready yet! Please review everything and make sure all fields listed as \"*Required\" are filled.") }
+    else { if (confirm("Are you ready to sumbit the application?\nA review of all fields is recommended before submitting\nPlease do not close the page until you recieve a notification that it is done.")) {
+      submitButton.innerHTML = "<img src='image/loadingIcon.gif' alt='loading' style='width:20px;height:20px'>";
+      toggleProcessCursor(document.body);
+      submitForm("/contact", (data) => {
+        toggleProcessCursor(document.body); alert(data["response"]); submitButton.innerHTML = "Submit";
       });
-    } else { alert("Form still has unfilled information; please reevaluate.") }
+    }}
   });
+  validateInputs(); constValidate(); constStoreForm(document,"input:not([type='file'],#signDate,#signature),textarea");
 </script>

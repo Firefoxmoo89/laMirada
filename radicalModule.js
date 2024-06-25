@@ -20,7 +20,7 @@ exports.servePage = (page,status,headers,response) => {
   });
 }
 
-exports.processPOST = (request,response,daFunction) => {
+exports.processPOST = (request,daFunction) => {
   var filenameList = [];
   var form = new formidable.IncomingForm({
     multiples: true, uploadDir: "temp/", maxFileSize: 500 * 1024 * 1024, keepExtensions: true, 

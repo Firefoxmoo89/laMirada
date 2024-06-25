@@ -23,7 +23,21 @@ async function fetchadids(source, options, daFunction) {
 	.then(data => { daFunction(data) })
 }
 
-invalidSpan = document.createElement("span"); invalidSpan.innerHTML = "*Required";invalidSpan.setAttribute("class","invalid"); 
+function telFormat(element) {
+	element.value = element.value.replace(/[\D\s\._\-]+/g, "");
+		if (element.value.length>10) { element.value = element.value.slice(0,10) }
+		theGuts = element.value;
+
+		part1=""; part2=""; part3="";
+		if (theGuts.length<=3) { part1 = theGuts }
+		else if (theGuts.length>3 && theGuts.length<=6) {	part1 = theGuts.slice(0,3); part2 = theGuts.slice(3,-1)+theGuts.slice(-1)	}
+		else if (theGuts.length>6 && theGuts.length<=10) { part1 = theGuts.slice(0,3); part2 = theGuts.slice(3,6); part3 = theGuts.slice(6,-1)+theGuts.slice(-1) }
+		element.value = part1;
+		if (part2!="") { element.value += "-"+part2 }
+		if (part3!="") { element.value += "-"+part3 }
+}
+
+var invalidSpan = document.createElement("span"); invalidSpan.innerHTML = " *Required";invalidSpan.setAttribute("class","invalid"); 
 function validateInput(daInput,display="inline") {
 	if (daInput.required) {
 		newInvalid = invalidSpan.cloneNode(true); newInvalid.style.display = display;
@@ -36,8 +50,9 @@ function validateInput(daInput,display="inline") {
 				daLabel.appendChild(newInvalid); return false
 				}
 			} else if (daLabel.querySelector(".invalid")!=null) { daLabel.querySelector(".invalid").remove() }
-		} else if (daInput.type == "tel" && daInput.value.length<12) { daLabel.appendChild(newInvalid); return false }
-		else if (daInput.value=="") { daLabel.appendChild(newInvalid); return false }	
+		} else if (daInput.type == "tel") {	telFormat(daInput);	
+			if ( daInput.value.length<12) { daLabel.appendChild(newInvalid); return false }
+		}	else if (daInput.value=="") { daLabel.appendChild(newInvalid); return false }	
 	} return true
 }
 function validateInputs(parentElement=document,display="inline",selectors="input[required],textarea[required],select[required]") { 
@@ -47,6 +62,63 @@ function validateInputs(parentElement=document,display="inline",selectors="input
 			if(!validateInput(inputList[i],display)) { validParent = false }
 		}
 	} return validParent
+}
+
+function constValidate(parentElement=document,display="inline",selectors="input[required],textarea[required],select[required]") {
+	inputList = parentElement.querySelectorAll(selectors);
+  for (daInput of inputList) { daInput.addEventListener("input",event=>{validateInput(event.target,display)}) }
+}
+
+function storeForm(parentElement=document,selectors="input,select,textarea") {
+	elementList = parentElement.querySelectorAll(selectors);
+	for (element of elementList) {
+		key = element.name; 
+		if (element.type == "radio") {	
+			value = document.querySelector("input[name='"+key+"']:checked").value;
+			localStorage.setItem(key,value); 
+		}	else if (element.type == "checkbox") {
+			boxList = document.querySelectorAll("#input[name='"+element.name+"']:checked"); 
+			value = ""; for (checked of boxList) { value += checked.value+"," }
+			localStorage.setItem(key,value);
+		} else { localStorage.setItem(element.name, element.value) }
+	}
+}
+
+function constStoreForm(parentElement=document,selectors="input:not([type='file']),select,textarea") {
+	elementList = parentElement.querySelectorAll(selectors);
+	for (element of elementList) {
+		element.addEventListener("change",event => { 
+			changedInput = event.target; key = changedInput.name; 
+      if (changedInput.type == "radio") {	
+        value = document.querySelector("input[name='"+key+"']:checked").value;
+        localStorage.setItem(key,value); 
+      }	else if (changedInput.type == "checkbox") {
+        boxList = document.querySelectorAll("#input[name='"+changedInput.name+"']:checked"); 
+        value = ""; for (checked of boxList) { value += checked.value+"," }
+				localStorage.setItem(key,value);
+      } else { localStorage.setItem(changedInput.name, changedInput.value) }
+    })
+	}
+}
+
+function loadForm(parentElement=document,selectors="input,select,textarea") {
+	elementList = parentElement.querySelectorAll(selectors);
+	for (element of elementList) {
+		key = daInput.name;
+    if (element.type == "radio") { 
+      if (localStorage.getItem(key)!=null) { 
+				value = localStorage.getItem(key);
+        parentElement.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true;
+      }
+    } else if (element.type == "checkbox") {
+			if (localStorage.getItem(key)!=null) {
+				value = localStorage.getItem(key);
+				valueList = value.split(",");
+				for (let value of valueList) { parentElement.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true; }
+			}
+		} else { daInput.value = localStorage.getItem(key) }
+    if (daInput.type == "range") { daInput.nextElementSibling.innerHTML = daInput.value }
+  }
 }
 
 function submitForm(source, daFunction, selectors="input:not([data-submitform='ignore']),textarea:not([data-submitform='ignore']),select:not([data-submitform='ignore'])", daParent=document) {
@@ -60,21 +132,3 @@ function submitForm(source, daFunction, selectors="input:not([data-submitform='i
 	} 
 	fetchadids(source, { method: "POST", body: daFormData }, daFunction);
 }
-
-import * as Sentry from '@sentry/browser';
-import { CaptureConsole } from '@sentry/integrations';
-Sentry.init({
-	dsn: "https://498e2ebd4b903ec474a61ad56721a3e6@o4507343182888960.ingest.us.sentry.io/4507343186165760",
-	integrations: [
-    new CaptureConsole({
-      levels: ['error']
-    })
-  ],
-	beforeSend(event, hint) {
-		// Check if it is an exception, and if so, show the report dialog
-		if (event.exception && event.event_id) {
-			Sentry.showReportDialog({ eventId: event.event_id });
-		}
-		return event;
-	},
-});
