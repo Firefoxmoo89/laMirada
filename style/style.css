@@ -51,7 +51,7 @@ footer > div > section > div { display: flex; flex-direction: row; align-items: 
 footer a, footer a:visited { 
 	display: block; opacity: .8;
 	margin: 5px;
-	color: #ffffff; text-decoration: none;
+	color: #fff; text-decoration: none;
 } footer a:hover,footer a:visited:hover { animation: footerHover .2s linear; animation-fill-mode: forwards }
 
 /* ___________________________General Page Formatting___________________________________ */
@@ -59,10 +59,20 @@ div#main a,div#main a:visited { text-decoration: none; color: #414042; font-weig
 img.logo { width: 100px; margin: 2px }
 h1 { margin-top: 0; font-weight: 300; line-height: 1.2; font-size: 2.5em; text-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px }
 .mobile { display: none }
+button {
+	background-color: #fff;
+	border: none;
+}
+button:hover { filter: contrast(150%) }
+button:active {	filter: invert(20%) }
+
+/* __________________________Forms_________________________ */
 div.flexrow { display:flex; flex-direction:row; align-items:start }
 div.flexrow > div { flex-grow: 1; flex-shrink: 10 } div.flexrow > div.largeFlex { flex-grow: 10; flex-shrink: 1 }
 div.flexrow > div > input { width: 95% }
 span.invalid { color: red; font-weight: bold; font-size: 1.2em }
+@keyframes warningBlink {	0% { background-color: none }	50% { background-color: #b21c1c } 100% { background-color: none } }
+.blinky { animation: warningBlink .5s linear; animation-iteration-count: 2 }
 label,div.label {
 	margin: 0 0 10px 0;
 	cursor: pointer;

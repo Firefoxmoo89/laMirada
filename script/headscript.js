@@ -37,6 +37,11 @@ function telFormat(element) {
 		if (part3!="") { element.value += "-"+part3 }
 }
 
+function isVisible(element) {
+	const { top,bottom } = element.getBoundingClientRect();
+	return (top>0 || bottom>0) && top < window.innerHeight;
+}
+
 var invalidSpan = document.createElement("span"); invalidSpan.innerHTML = " *Required";invalidSpan.setAttribute("class","invalid"); 
 function validateInput(daInput,display="inline") {
 	if (daInput.required) {
@@ -55,8 +60,8 @@ function validateInput(daInput,display="inline") {
 		}	else if (daInput.value=="") { daLabel.appendChild(newInvalid); return false }	
 	} return true
 }
-function validateInputs(parentElement=document,display="inline",selectors="input[required],textarea[required],select[required]") { 
-	inputList = parentElement.querySelectorAll(selectors); validParent = true; var i;
+function validateInputs(parent=document,display="inline",selectors="input[required],textarea[required],select[required]") { 
+	inputList = parent.querySelectorAll(selectors); validParent = true; var i;
 	if (inputList.length > 0) {																
 		for (i=0;i<inputList.length;i++) { 
 			if(!validateInput(inputList[i],display)) { validParent = false }
@@ -64,13 +69,32 @@ function validateInputs(parentElement=document,display="inline",selectors="input
 	} return validParent
 }
 
-function constValidate(parentElement=document,display="inline",selectors="input[required],textarea[required],select[required]") {
-	inputList = parentElement.querySelectorAll(selectors);
+function constValidate(parent=document,display="inline",selectors="input[required],textarea[required],select[required]") {
+	inputList = parent.querySelectorAll(selectors);
   for (daInput of inputList) { daInput.addEventListener("input",event=>{validateInput(event.target,display)}) }
 }
 
-function storeForm(parentElement=document,selectors="input,select,textarea") {
-	elementList = parentElement.querySelectorAll(selectors);
+function inputFinder(parent=document,selectSelectors,labelSelectors) {
+	function collect(direction=false) {
+		if (document.querySelector(".blinky")!=null) { document.querySelector(".blinky").classList.remove("blinky") }
+		requiredList = parent.querySelectorAll(".invalid"); requiredList = Array.from(requiredList);
+		parent.querySelector(labelSelectors[1]).innerText = requiredList.length.toString();
+		indexSpan = parent.querySelector(labelSelectors[0]); 
+		if (direction == false) { index = 0 }
+		else if (direction == "up") { index = Number(parent.querySelector(labelSelectors[0]).innerText-2)
+		} else { index = Number(parent.querySelector(labelSelectors[0]).innerText) }
+		indexSpan.innerText = index+1;
+		selected = requiredList[index];
+		selected.scrollIntoView({behavior:"smooth",block:"center"});
+		selected.parentElement.classList.add("blinky");
+	} collect();
+	function collectUp(event) { collect("up") } function collectDown(event) {collect("down") }
+	parent.querySelector(selectSelectors[0]).addEventListener("click",collectUp);
+	parent.querySelector(selectSelectors[1]).addEventListener("click",collectDown);		
+}
+
+function storeForm(parent=document,selectors="input,select,textarea") {
+	elementList = parent.querySelectorAll(selectors);
 	for (element of elementList) {
 		key = element.name; 
 		if (element.type == "radio") {	
@@ -84,8 +108,8 @@ function storeForm(parentElement=document,selectors="input,select,textarea") {
 	}
 }
 
-function constStoreForm(parentElement=document,selectors="input:not([type='file']),select,textarea") {
-	elementList = parentElement.querySelectorAll(selectors);
+function constStoreForm(parent=document,selectors="input:not([type='file']),select,textarea") {
+	elementList = parent.querySelectorAll(selectors);
 	for (element of elementList) {
 		element.addEventListener("change",event => { 
 			changedInput = event.target; key = changedInput.name; 
@@ -101,20 +125,20 @@ function constStoreForm(parentElement=document,selectors="input:not([type='file'
 	}
 }
 
-function loadForm(parentElement=document,selectors="input,select,textarea") {
-	elementList = parentElement.querySelectorAll(selectors);
+function loadForm(parent=document,selectors="input,select,textarea") {
+	elementList = parent.querySelectorAll(selectors);
 	for (element of elementList) {
 		key = daInput.name;
     if (element.type == "radio") { 
       if (localStorage.getItem(key)!=null) { 
 				value = localStorage.getItem(key);
-        parentElement.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true;
+        parent.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true;
       }
     } else if (element.type == "checkbox") {
 			if (localStorage.getItem(key)!=null) {
 				value = localStorage.getItem(key);
 				valueList = value.split(",");
-				for (let value of valueList) { parentElement.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true; }
+				for (let value of valueList) { parent.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true; }
 			}
 		} else { daInput.value = localStorage.getItem(key) }
     if (daInput.type == "range") { daInput.nextElementSibling.innerHTML = daInput.value }

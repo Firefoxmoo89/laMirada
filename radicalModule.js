@@ -2,7 +2,7 @@ var fs = require("fs"); var util = require("util"); var formidable = require("fo
 //var mysql = require("mysql"); 
 
 exports.serveFile = (file,status,headers,response) => {
-  fs.readFile(file,(error,fileData) => {
+  fs.readFile(file,(error,fileData) => { if (error) { throw error }
     response.writeHead(status,headers); 
     response.end(fileData);
   });
@@ -10,9 +10,9 @@ exports.serveFile = (file,status,headers,response) => {
 
 exports.servePage = (page,status,headers,response) => {
   headers["Content-type"] = "text/html";
-  fs.readFile("html/top.html",(errorTop,htmlTop) => {
-    fs.readFile("html/bottom.html",(errorBottom,htmlBottom) => {
-      fs.readFile("html/"+page+".html",(error,fileData) => {
+  fs.readFile("html/top.html",(errorTop,htmlTop) => { if (errorTop) { throw errorTop }
+    fs.readFile("html/bottom.html",(errorBottom,htmlBottom) => { if (errorBottom) { throw errorBottom }
+      fs.readFile("html/"+page+".html",(error,fileData) => { if (error) { throw error }
         response.writeHead(status,headers);         
         response.end(htmlTop+fileData+htmlBottom);
       });

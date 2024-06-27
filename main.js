@@ -57,7 +57,11 @@ function daServer(request, response) {
   }
   else if (deets.pathname.includes("/style")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/css"},response) }
   else if (deets.pathname.includes("/script")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/javascript"},response) }
-  else if (deets.pathname.includes("/image")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"image/png"},response) }
+  else if (deets.pathname.includes("/image")) { 
+    extension = deets.pathname.slice(deets.pathname.indexOf(".")+1);
+    if (extension == "svg") { extension = "svg+xml" }
+    rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"image/"+extension},response) 
+  }
   else if (deets.pathname == "/sitemap.xml") { rad.serveFile("sitemap.xml",200,{},response) }
   else { rad.servePage("missing",404,{},response) }
 }
