@@ -14,10 +14,18 @@ function daServer(request, response) {
   deets = url.parse(request.url, true);
  
   if (deets.pathname == "/") {
+    if (request.method == "GET") {
       response.writeHead(301, {
         Location: "location",
       });
       response.end();
+    } else if (request.method == "POST") {
+      formData = rad.processPOST(request,(formData,error) => { 
+        if (error) console.log(error); 
+        console.log(formData);
+        response.writeHead(200,{}); response.end(JSON.stringify({"response":"Recieved!"}));
+      });
+    }
   }
   else if (deets.pathname == "/location") {
     rad.servePage("location",200,{},response);

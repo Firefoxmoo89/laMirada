@@ -17,10 +17,10 @@ function toggleDisplay(selector,option1="none",option2="block") {
 	else { element.style.display = option1 }
 }
 
-async function fetchadids(source, options, daFunction) {
+async function fetchadids(source, options, daFunction=false) {
 	await fetch(source,options)
 	.then(response => response.json())
-	.then(data => { daFunction(data) })
+	.then(data => { if (daFunction != false) { daFunction(data) } else { console.log("fetch at",source,":",data) } })
 }
 
 function telFormat(element) {
@@ -127,22 +127,18 @@ function constStoreForm(parent=document,selectors="input:not([type='file']),sele
 }
 
 function loadForm(parent=document,selectors="input,select,textarea") {
-	elementList = parent.querySelectorAll(selectors);
-	for (element of elementList) {
-		key = daInput.name;
-    if (element.type == "radio") { 
-      if (localStorage.getItem(key)!=null) { 
-				value = localStorage.getItem(key);
-        parent.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true;
-      }
-    } else if (element.type == "checkbox") {
-			if (localStorage.getItem(key)!=null) {
-				value = localStorage.getItem(key);
+	elementList = parent.querySelectorAll(selectors); 
+	for (element of elementList) { 
+		key = element.name;
+		if (localStorage.getItem(key)!="" && localStorage.getItem(key)!=null) { 
+			value = localStorage.getItem(key); 
+			if (element.type == "radio") { parent.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true }
+			else if (element.type == "checkbox") { 
 				valueList = value.split(",");
 				for (let value of valueList) { parent.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true; }
-			}
-		} else { daInput.value = localStorage.getItem(key) }
-    if (daInput.type == "range") { daInput.nextElementSibling.innerHTML = daInput.value }
+			} else { element.value = value }
+		}
+    if (element.type == "range") { element.nextElementSibling.innerHTML = element.value }
   }
 }
 
@@ -150,11 +146,11 @@ function submitForm(source, daFunction, selectors="input:not([data-submitform='i
 	daFormData = new FormData(); finishedOptions = []; 
 	try { inputList = daParent.querySelectorAll(selectors) } 
 	catch(error) { console.error(error); inputList = daParent.querySelectorAll("input,textarea,select") }
-	for (let i=0;i<inputList.length;i++) { daInput = inputList[i];
+	for (let daInput of inputList) { try {
 		if (daInput.type == "file") { for ( let ii=0;ii<daInput.files.length;ii++) {	daFormData.append(daInput.name+ii.toString(),daInput.files[ii])	}	}
 		else if (daInput.type == "radio" || daInput.type == "checkbox") { daName = daInput.name; daValue = daParent.querySelector("input[name='"+daName+"']:checked").value;
 			if (!finishedOptions.includes(daName)&&daValue!=null) {daFormData.append(daName,daValue); finishedOptions.push(daName) }																				 
 		} else { daFormData.append(daInput.name,daInput.value) }																
-	} 
+	} catch(error) { daFormData.append(daInput.name,"[not filled]") } }
 	fetchadids(source, { method: "POST", body: daFormData }, daFunction);
 }

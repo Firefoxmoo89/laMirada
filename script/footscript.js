@@ -7,3 +7,9 @@ document.querySelector("button#mobileNav").addEventListener("click", () => {
 	else { nav.style.display = "none" }
 });
 
+/*
+fetchadids("https://api.ipify.org?format=json", {}, data => { 
+	ipForm = new FormData(); ipForm.append("ip",data.ip);
+	fetchadids("/",{method: "POST", body: ipForm });
+}); 
+*/
