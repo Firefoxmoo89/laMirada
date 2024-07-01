@@ -109,7 +109,8 @@ function storeForm(parent=document,selectors="input,select,textarea") {
 }
 
 function constStoreForm(parent=document,selectors="input:not([type='file']),select,textarea") {
-	elementList = parent.querySelectorAll(selectors);
+	try { elementList = parent.querySelectorAll(selectors) } 
+	catch(error) { console.error(error); elementList = parent.querySelectorAll("input,textarea,select") }
 	for (element of elementList) {
 		element.addEventListener("change",event => { 
 			changedInput = event.target; key = changedInput.name; 
@@ -146,8 +147,9 @@ function loadForm(parent=document,selectors="input,select,textarea") {
 }
 
 function submitForm(source, daFunction, selectors="input:not([data-submitform='ignore']),textarea:not([data-submitform='ignore']),select:not([data-submitform='ignore'])", daParent=document) {
-	daFormData = new FormData();
-	inputList = daParent.querySelectorAll(selectors); finishedOptions = []; 
+	daFormData = new FormData(); finishedOptions = []; 
+	try { inputList = daParent.querySelectorAll(selectors) } 
+	catch(error) { console.error(error); inputList = daParent.querySelectorAll("input,textarea,select") }
 	for (let i=0;i<inputList.length;i++) { daInput = inputList[i];
 		if (daInput.type == "file") { for ( let ii=0;ii<daInput.files.length;ii++) {	daFormData.append(daInput.name+ii.toString(),daInput.files[ii])	}	}
 		else if (daInput.type == "radio" || daInput.type == "checkbox") { daName = daInput.name; daValue = daParent.querySelector("input[name='"+daName+"']:checked").value;
