@@ -1,24 +1,24 @@
 var fs = require("fs"); var util = require("util"); var formidable = require("formidable");
 //var mysql = require("mysql"); 
 
-exports.serveFile = (file,status,headers,response) => {
-  fs.readFile(file,(error,fileData) => { if (error) { throw error }
-    response.writeHead(status,headers); 
-    response.end(fileData);
-  });
-};
-
 exports.servePage = (page,status,headers,response) => {
   headers["Content-type"] = "text/html";
-  fs.readFile("html/top.html",(errorTop,htmlTop) => { if (errorTop) { throw errorTop }
-    fs.readFile("html/bottom.html",(errorBottom,htmlBottom) => { if (errorBottom) { throw errorBottom }
-      fs.readFile("html/"+page+".html",(error,fileData) => { if (error) { throw error }
+  fs.readFile("html/top.html",(errorTop,htmlTop) => { if (errorTop) { console.error(errorTop); }
+    fs.readFile("html/bottom.html",(errorBottom,htmlBottom) => { if (errorBottom) { console.error(errorBottom) }
+      fs.readFile("html/"+page+".html",(error,fileData) => { if (error) { console.error(error) }
         response.writeHead(status,headers);         
         response.end(htmlTop+fileData+htmlBottom);
       });
     });
   });
 }
+
+exports.serveFile = (file,status,headers,response) => {
+  fs.readFile(file,(error,fileData) => { if (error) { console.error(error); this.servePage("missing",404,{},response); return }
+    response.writeHead(status,headers); 
+    response.end(fileData);
+  });
+};
 
 exports.processPOST = (request,daFunction) => {
   var filenameList = [];
