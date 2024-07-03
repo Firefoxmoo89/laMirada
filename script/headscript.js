@@ -17,9 +17,11 @@ function toggleDisplay(selector,option1="none",option2="block") {
 	else { element.style.display = option1 }
 }
 
-async function fetchadids(source, options, daFunction=false) {
-	await fetch(source,options)
-	.then(response => response.json())
+async function fetchadids(source, type, options, daFunction=false) {
+	if (type == "json") { function process(response){return response.json()} } 
+	else if (type == "text") { function process(response){return response.text()} }
+	else { function process(response){return response.text()} }
+	await fetch(source,options).then(process)
 	.then(data => { if (daFunction != false) { daFunction(data) } else { console.log("fetch at",source,":",data) } })
 }
 
@@ -152,5 +154,5 @@ function submitForm(source, daFunction, selectors="input:not([data-submitform='i
 			if (!finishedOptions.includes(daName)&&daValue!=null) {daFormData.append(daName,daValue); finishedOptions.push(daName) }																				 
 		} else { daFormData.append(daInput.name,daInput.value) }																
 	} catch(error) { daFormData.append(daInput.name,"[not filled]") } }
-	fetchadids(source, { method: "POST", body: daFormData }, daFunction);
+	fetchadids(source, "text", { method: "POST", body: daFormData }, daFunction);
 }
