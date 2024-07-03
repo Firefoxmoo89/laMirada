@@ -19,49 +19,46 @@ function daServer(request, response) {
         Location: "location",
       });
       response.end();
-    } else if (request.method == "POST") {
-      formData = rad.processPOST(request,(formData,error) => { 
-        if (error) console.log(error); 
-        console.log(formData);
-        response.writeHead(200,{}); response.end(JSON.stringify({"response":"Recieved!"}));
-      });
     }
   }
-  else if (deets.pathname == "/location") {
+  else if (deets.pathname.includes("/location")) {
     rad.servePage("location",200,{},response);
   }
-  else if (deets.pathname == "/apply") {
+  else if (deets.pathname.includes("/apply")) {
     if (request.method == "GET") {
       rad.servePage("apply",200,{},response);
     } else if (request.method == "POST") {
       formData = rad.processPOST(request,(formData,error) => {
         if (error) {
           response.writeHead(400,{}); 
-          response.end(JSON.stringify({"response":"Image uploads failed; please check the validity of your images"}));
+          response.end("Image uploads failed; please check the validity of your images");
         } else {
           mail.submittedApplication(formData);
           response.writeHead(200,{});
-          response.end(JSON.stringify({"response": "Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods."}));
+          response.end("Thank you for your application!\nWe will respond to let you know of our decision through your provided contact methods.");
         }
       });
     }
   }
-  else if (deets.pathname == "/contact") {
+  else if (deets.pathname.includes("/contact")) {
     if (request.method == "GET") {
       rad.servePage("contact",200,{},response);
     } else if (request.method == "POST") {
       formData = rad.processPOST(request,(formData,error) => { 
         if (error) { 
           response.writeHead(400,{});
-          response.end(JSON.stringify({"response":"An error has occured and the form could not be submitted"}));
+          response.end("An error has occured and the form could not be submitted");
           throw error;
         } else {
         mail.sendEmail("Inquiry from "+formData.firstName+" "+formData.lastName,formData.body,"<br>Email: "+formData.daAddress+"<br>Number: "+formData.daNumber+"<br>Prefers: "+formData.contactMethod);
         response.writeHead(200,{});
-        response.end(JSON.stringify({"response":"Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!"}));
+        response.end("Success! Your message has been sent.\nA response will be sent to you shortly.\nThank you for using our service!");
         }
       });
     }
+  }
+  else if (deets.pathname.includes("/listings")) { 
+   rad.servePage("listings",200,{},response)
   }
   else if (deets.pathname.includes("/style")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/css"},response) }
   else if (deets.pathname.includes("/script")) { rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"text/javascript"},response) }
