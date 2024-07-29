@@ -95,22 +95,23 @@ function inputFinder(parent=document,selectSelectors,labelSelectors) {
 	parent.querySelector(selectSelectors[1]).addEventListener("click",collectDown);		
 }
 
-function storeForm(parent=document,selectors="input,select,textarea") {
-	elementList = parent.querySelectorAll(selectors);
+function storeForm(parent=document,selectors="input:not([data-autofill='ignore'],[type='file']),select:not([data-autofill='ignore']),textarea:not([data-autofill='ignore'])") {
+	try { elementList = parent.querySelectorAll(selectors) } 
+	catch(error) { console.error(error); elementList = parent.querySelectorAll("input,textarea,select") }
 	for (element of elementList) {
 		key = element.name; 
 		if (element.type == "radio") {	
 			value = document.querySelector("input[name='"+key+"']:checked").value;
 			localStorage.setItem(key,value); 
 		}	else if (element.type == "checkbox") {
-			boxList = document.querySelectorAll("#input[name='"+element.name+"']:checked"); 
+			boxList = document.querySelectorAll("input[name='"+element.name+"']:checked"); 
 			value = ""; for (checked of boxList) { value += checked.value+"," }
 			localStorage.setItem(key,value);
 		} else { localStorage.setItem(element.name, element.value) }
 	}
 }
 
-function constStoreForm(parent=document,selectors="input:not([type='file']),select,textarea") {
+function constStoreForm(parent=document,selectors="input:not([data-autofill='ignore'],[type='file']),select:not([data-autofill='ignore']),textarea:not([data-autofill='ignore'])") {
 	try { elementList = parent.querySelectorAll(selectors) } 
 	catch(error) { console.error(error); elementList = parent.querySelectorAll("input,textarea,select") }
 	for (element of elementList) {
@@ -120,7 +121,7 @@ function constStoreForm(parent=document,selectors="input:not([type='file']),sele
         value = document.querySelector("input[name='"+key+"']:checked").value;
         localStorage.setItem(key,value); 
       }	else if (changedInput.type == "checkbox") {
-        boxList = document.querySelectorAll("#input[name='"+changedInput.name+"']:checked"); 
+        boxList = document.querySelectorAll("input[name='"+changedInput.name+"']:checked"); 
         value = ""; for (checked of boxList) { value += checked.value+"," }
 				localStorage.setItem(key,value);
       } else { localStorage.setItem(changedInput.name, changedInput.value) }
@@ -128,8 +129,9 @@ function constStoreForm(parent=document,selectors="input:not([type='file']),sele
 	}
 }
 
-function loadForm(parent=document,selectors="input,select,textarea") {
-	elementList = parent.querySelectorAll(selectors); 
+function loadForm(parent=document,selectors="input:not([data-autofill='ignore'],[type='file']),select:not([data-autofill='ignore']),textarea:not([data-autofill='ignore'])") {
+	try { elementList = parent.querySelectorAll(selectors) } 
+	catch(error) { console.error(error); elementList = parent.querySelectorAll("input,textarea,select") }
 	for (element of elementList) { 
 		key = element.name;
 		if (localStorage.getItem(key)!="" && localStorage.getItem(key)!=null) { 
@@ -137,7 +139,9 @@ function loadForm(parent=document,selectors="input,select,textarea") {
 			if (element.type == "radio") { parent.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true }
 			else if (element.type == "checkbox") { 
 				valueList = value.split(",");
-				for (let value of valueList) { parent.querySelector("input[name='"+key+"'][value='"+value+"']").checked = true; }
+				for (let daValue of valueList) { 
+					if (daValue != "") { parent.querySelector("input[name='"+key+"'][value='"+daValue+"']").checked = true }
+				}
 			} else { element.value = value }
 		}
     if (element.type == "range") { element.nextElementSibling.innerHTML = element.value }

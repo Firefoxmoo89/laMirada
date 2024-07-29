@@ -15,7 +15,7 @@ function daServer(request, response) {
  
   if (deets.pathname == "/") {
     if (request.method == "GET") {
-      response.writeHead(301, {
+      response.writeHead(302, {
         Location: "location",
       });
       response.end();
@@ -67,7 +67,7 @@ function daServer(request, response) {
     if (extension == "svg") { extension = "svg+xml" }
     rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"image/"+extension},response) 
   }
-  else if (deets.pathname == "/sitemap.xml") { rad.serveFile("sitemap.xml",200,{},response) }
+  else if (deets.pathname == "/sitemap") { rad.serveFile("sitemap.xml",200,{},response) }
   else { rad.servePage("missing",404,{},response) }
 }
 

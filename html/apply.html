@@ -4,7 +4,7 @@
   <h1 class="articleTitle">Application Criteria and Process</h1>
   <p>Each adult must complete a separate application, submit a photo ID (from any country or state), and provide proof of income (i.e. pay stubs, bank statements, employment letters, tax returns).<br>A co-signer or higher deposit may be if the applicant has insufficient landlord, credit or income references.<br>We will not discriminate due to race, ethnicity, family / marital status, age, disability, source of income, or religious / sexual beliefs.<br>Until execution & delivery of lease agreement to applicant, we reserve the right to reject or deny this application for any reason, such as: Application is unsigned, incomplete, or contains fraudulent / misleading informtion; low wage-to-rent ratio; collections, liens, judgments, or bankruptcy; poor rental references; recent evictions; unstable or unverifiable income; pattern of criminal behavior or abusive attitude.<br>Approved applicants will have 2 hrs from notification to sign a rental agreement & pay full deposit, or we will proceed with the next qualified applicant. Applicant has no rights to the property until a rental agreement is signed by both parties & the account charges are fully paid.</p> 
   <div>
-    <input required type="checkbox" id="agreeProcess" name="agreeProcess" class="simple">
+    <input required type="checkbox" id="agreeProcess" name="agreeProcess" value="Yes" class="simple" data-submitform="ignore" data-autofill="ignore">
     <label for="agreeProcess" id="agreeProcessLabel" style="display:inline">I have read and agree to the terms and conditions above</label>
   </div>
 </div></section><section class="colored"><div>	
@@ -111,7 +111,7 @@
     <label for="rentalStatement" style="display:inline">Current Rental Statement / Proof of Rent</label>
     <input type="file" accept="image/*" id="rentalStatement" name="rentalStatement" multiple>
   </div><div style="margin: 20px 0">
-    <input type="checkbox" id="extraRental" name="extraRental" class="simple" data-submitform="ignore" onchange="toggleDisplay('div#priorRental')">
+    <input type="checkbox" id="extraRental" name="extraRental" value="yes" class="simple" onchange="toggleDisplay('div#priorRental')" data-submitform="ignore" data-autofill="ignore">
     <label for="extraRental" style="display:inline">Add Second Rental (please fill if applicable)</label>
   </div>
   <div id="priorRental" style="display:none"><h2 class="articleTitle">Prior Rental</h2>
@@ -205,7 +205,7 @@
     <label for="incomeStatement" style="display:inline">Proof of Income (ex. w2, pay stubs, etc)</label>
     <input required type="file" accept="image/*" id="incomeStatement" name="incomeStatement" multiple>
   </div><div style="margin:20px 0">
-    <input type="checkbox" id="extraIncome" name="extraIncome" class="simple" data-submitform="ignore" onchange="toggleDisplay('div#otherIncomeDiv')">
+    <input type="checkbox" id="extraIncome" name="extraIncome" value="Yes" class="simple" data-submitform="ignore" data-autofill="ignore" onchange="toggleDisplay('div#otherIncomeDiv')">
     <label for="extraIncome" style="display:inline">Add Second Income (please fill if applicable)</label>
   </div>
   <div id="otherIncomeDiv" style="display:none"><h2 class="articleTitle">Income 2</h2>
@@ -332,12 +332,12 @@
   <h1 class="articleTitle">Authorization of Screening</h1>
   <p>I, the undersigned, hereby declare that the above information is true and correct, and has been made for the purpose of applying for residency. I acknowledges that false or omitted information may constitute as grounds for rejection of this application, termination of occupancy, and/or forfeiture of fees or deposits & may constitute as a criminal offense under the laws of this state.<br>I do hereby authorize a full consumer and characture investigation to evaluate my tenancy, including but not limited to contacting past and present landlords, employers, public records, and any other sources deemed necessary. I authorize said parties the release of information requested, & relinquish/hold harmless all parties for any & all damages or liabilities which might result through obtaining/providing said information.<br>In addition, I do hereby declare that a photocopy or pdf email of this document shall be as valid as the original, and will suffice as an authorized signature to release information on all my financial accounts related to this transaction. This investigation is for resident screening purposes only, and will remain private, secure, & confidential for all parties involved.</p>
   <div>
-    <input required type="checkbox" id="signAgreement" name="signAgreement" class="simple">
+    <input required type="checkbox" id="signAgreement" name="signAgreement" value="Yes" class="simple" data-submitform="ignore" data-autofill="ignore">
     <label for="signAgreement" id="signAgreementLabel" style="display:inline">I have read and agree to the terms and conditions above</label>
   </div>
-  <input required type="text" id="signature" name="signature" class="fancySignature">
+  <input required type="text" id="signature" name="signature" class="fancySignature" data-autofill="ignore">
   <label for="signature">Sign Name</label>
-  <input required type="date" id="signDate" name="signDate">
+  <input required type="date" id="signDate" name="signDate" data-autofill="ignore">
   <label for="signDate">Date</label>
   <button type="button" id="submitButton">Submit</button>
 </div></section>
@@ -369,7 +369,7 @@
       submitForm("/apply", (data) => { console.log("form partially submitted") });
     }
     else { if (confirm("Are you ready to sumbit the application?\nA review of all fields is recommended before submitting\nPlease do not close the page until you recieve a notification that it is done. It will take longer with more or larger files.")) {
-      submitButton.innerHTML = "<img src='../image/loadingIcon.gif' alt='loading' style='width:20px;height:20px'>";
+      submitButton.innerHTML = "<img src='image/loadingIcon.gif' alt='loading' style='width:20px;height:20px'>";
       document.querySelector("#findBox").style.display = "none";
       toggleProcessCursor(document.body);
       submitForm("/apply", (data) => {
@@ -386,7 +386,6 @@
   } calculateIncome();
   for (i=0;i<incomeList.length;i++) {	incomeList[i].addEventListener("input",calculateIncome) }
   // Local Storage and Validation 
-  loadForm(document,"input:not([type='file'],#signDate,#signature),textarea"); constStoreForm(document,"input:not([type='file'],#signDate,#signature),textarea"); 
+  loadForm(); constStoreForm(); 
   validateInputs(); constValidate();
-  
 </script>
