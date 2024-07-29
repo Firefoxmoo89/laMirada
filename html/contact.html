@@ -27,7 +27,7 @@
     ready = validateInputs(document.querySelector("#main")); 
     if (!ready) { alert("The form is not ready yet! Please review everything and make sure all fields listed as \"*Required\" are filled.") }
     else { if (confirm("Are you ready to sumbit the application?\nA review of all fields is recommended before submitting\nPlease do not close the page until you recieve a notification that it is done.")) {
-      submitButton.innerHTML = "<img src='image/loadingIcon.gif' alt='loading' style='width:20px;height:20px'>";
+      submitButton.innerHTML = "<img src='image/icon/loadingIcon.gif' alt='loading' style='width:20px;height:20px'>";
       toggleProcessCursor(document.body);
       submitForm("/contact", (data) => {
         toggleProcessCursor(document.body); alert(data["response"]); submitButton.innerHTML = "Submit";

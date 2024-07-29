@@ -345,9 +345,9 @@
   <span>*Required Fields</span>
   <div style="margin: 0 10px;font-weight:bold"><span id="requiredIndex">?</span><span>/</span><span id="requiredTotal">?</span></div>
   <button type="button" id="upFind" style="border-radius:50px;padding:0;margin:2px 5px">
-    <img src="image/upArrow.svg" alt="^" style="height:100%;aspect-ratio:1/1" height="20" width="20">
+    <img src="image/icon/upArrow.svg" alt="^" style="height:100%;aspect-ratio:1/1" height="20" width="20">
   </button><button type="button" id="downFind" style="border-radius:50px;padding:0;margin:2px 5px">
-    <img src="image/downArrow.svg" alt="⌄" style="height:100%;aspect-ratio:1/1" height="20" width="20">
+    <img src="image/icon/upArrow.svg" alt="^" style="height:100%;aspect-ratio:1/1;transform:rotate(180deg)" height="20" width="20">
   </button>
 </div>
 
@@ -369,7 +369,7 @@
       submitForm("/apply", (data) => { console.log("form partially submitted") });
     }
     else { if (confirm("Are you ready to sumbit the application?\nA review of all fields is recommended before submitting\nPlease do not close the page until you recieve a notification that it is done. It will take longer with more or larger files.")) {
-      submitButton.innerHTML = "<img src='image/loadingIcon.gif' alt='loading' style='width:20px;height:20px'>";
+      submitButton.innerHTML = "<img src='image/icon/loadingIcon.gif' alt='loading' style='width:20px;height:20px'>";
       document.querySelector("#findBox").style.display = "none";
       toggleProcessCursor(document.body);
       submitForm("/apply", (data) => {

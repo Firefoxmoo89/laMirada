@@ -4,30 +4,22 @@
   <meta charset="utf-8">
   <base href="../">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="image/icon.svg">
-	<link rel="stylesheet" href="style/style.css?v=D20240729T225151">
-	<script src="script/headscript.js?v=D20240729T225151"></script>
+  <link rel="icon" href="image/icon/icon.svg">
+	<link rel="stylesheet" href="style/style.css?v=D20240729T234911">
+	<script src="script/headscript.js?v=D20240729T234911"></script>
   <script src="https://js.sentry-cdn.com/498e2ebd4b903ec474a61ad56721a3e6.min.js" crossorigin="anonymous"></script>
-  <script>
-    Sentry.init({
-      dsn: "https://498e2ebd4b903ec474a61ad56721a3e6@o4507343182888960.ingest.us.sentry.io/4507343186165760",
-      beforeSend(event, hint) {
-        // Check if it is an exception, and if so, show the report dialog
-        if (event.exception && event.event_id) {
-          Sentry.showReportDialog({ eventId: event.event_id });
-        }
-        return event;
-      },
-    });
-  </script>
+  <meta property="og:title" content="La Mirada Country Estates"> 
+  <meta property="og:description" content="La Mirada Country Estates is a family mobile home and RV park with the best-valued rates around! A community of families, friends, and fantastic people! Located just West of Harlingen, it offers quick access to major highways and stores, while maintaining a quiet and peaceful stay away from the bustle of city life. Harlingen, TX, is a picturesque community in the heart of the Rio Grande Valley that blends small-town charm with diverse opportunities. Residents will find a relaxed setting with many city conveniences and a host of historic treasures. Whether your interests include camping, fishing, boating, hiking, educational exhibits, scenery, or wildlife, Harlingen can accommodate you! It also boasts quick access to South Padre Island and the Mexico border, providing a fun-filled and unique cultural experience."> 
+  <meta property="og:image" content="image/mainBuilding.png"> 
+  <meta property="og:url" content="lamiradaMHP.com"> 
 
 </head><body>
 
   <div id="root">
   
     <header>
-      <a href="/"><img id="banner" src="image/banner.svg" alt="La Mirada Country Estates" width="130" height="50"></a>
-      <button id="mobileNav" class="mobile" type="button"><img src="image/optionLines.svg" alt="Menu" width="50" height="50"></button>
+      <a href="/"><img id="banner" src="image/icon/banner.svg" alt="La Mirada Country Estates" width="130" height="50"></a>
+      <button id="mobileNav" class="mobile" type="button"><img src="image/icon/optionLines.svg" alt="Menu" width="50" height="50"></button>
       <nav>
         <a id="navLocation" href="location">Location</a>
         <a id="navContact" href="contact">Contact</a>

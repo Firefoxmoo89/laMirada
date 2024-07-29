@@ -2,7 +2,6 @@ require("./instrument.js");
 var http = require('http'); var url = require("url"); var fs = require("fs"); 
 var rad = require("./radicalModule.js"); var mail = require("./mail.js");
 
-
 datetime = new Date(); datetime = "D"+datetime.toISOString().slice(0,19).replaceAll(":","").replaceAll("-","");
 for (html of ["top.html","bottom.html"]) {
   content = fs.readFileSync("html/"+html,"utf8");
