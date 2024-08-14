@@ -78,21 +78,28 @@ function constValidate(parent=document,display="inline",selectors="input[require
 
 function inputFinder(parent=document,selectSelectors,labelSelectors) {
 	function collect(direction=false) {
-		if (document.querySelector(".blinky")!=null) { document.querySelector(".blinky").classList.remove("blinky") }
+		if (parent.querySelector(".blinky")!=null) { parent.querySelector(".blinky").classList.remove("blinky") }
 		requiredList = parent.querySelectorAll(".invalid"); requiredList = Array.from(requiredList);
 		parent.querySelector(labelSelectors[1]).innerText = requiredList.length.toString();
-		indexSpan = parent.querySelector(labelSelectors[0]); 
+		indexSpan = parent.querySelector(labelSelectors[0]);
 		if (direction == false) { index = 0 }
-		else if (direction == "up") { index = Number(parent.querySelector(labelSelectors[0]).innerText-2)
-		} else { index = Number(parent.querySelector(labelSelectors[0]).innerText) }
+		else {
+			currentIndex = Number(indexSpan.innerText);
+			if (direction == "up") { 
+				if (currentIndex == 1) { index = requiredList.length-1 }
+				else { index = currentIndex-2 }
+			} else if (direction == "down") { 
+				if (currentIndex == requiredList.length) { index = 0 }
+				else { index = currentIndex }
+			}
+		}
 		indexSpan.innerText = index+1;
 		selected = requiredList[index];
 		selected.scrollIntoView({behavior:"smooth",block:"center"});
 		selected.parentElement.classList.add("blinky");
 	} collect();
-	function collectUp(event) { collect("up") } function collectDown(event) {collect("down") }
-	parent.querySelector(selectSelectors[0]).addEventListener("click",collectUp);
-	parent.querySelector(selectSelectors[1]).addEventListener("click",collectDown);		
+	parent.querySelector(selectSelectors[0]).addEventListener("click",event=>{ collect ("up") });
+	parent.querySelector(selectSelectors[1]).addEventListener("click",event=>{ collect ("down") });		
 }
 
 function storeForm(parent=document,selectors="input:not([data-autofill='ignore'],[type='file']),select:not([data-autofill='ignore']),textarea:not([data-autofill='ignore'])") {
