@@ -6,6 +6,21 @@
     "nodemailer": "^6.9.13"
   },
   "scripts": {
-  "start": "node main.js"
-  }
+    "start": "node main.js"
+  },
+  "name": "lamirada",
+  "description": "A node.js advertising and rental application website for a mobile home park located in Texas. Deployment includes forms for rental applications and forms for asking questions that are sent to the manager of the park via email.",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Firefoxmoo89/lamirada.git"
+  },
+  "author": "Firefoxmoo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Firefoxmoo89/lamirada/issues"
+  },
+  "homepage": "https://github.com/Firefoxmoo89/lamirada#readme"
 }
