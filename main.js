@@ -1,4 +1,4 @@
-require("./instrument.js"); var secrets = require("./secrets.env");
+require("./instrument.js");
 var http = require('http'); var url = require("url"); var fs = require("fs"); 
 var rad = require("./radicalModule.js"); var mail = require("./mail.js");
 
