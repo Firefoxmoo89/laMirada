@@ -1,4 +1,4 @@
-require("./instrument.js");
+require("./instrument.js"); var secrets = require("./secrets.env");
 var http = require('http'); var url = require("url"); var fs = require("fs"); 
 var rad = require("./radicalModule.js"); var mail = require("./mail.js");
 
@@ -71,6 +71,5 @@ function daServer(request, response) {
   else { rad.servePage("missing",404,{},response) }
 }
 
-http.createServer(daServer).listen(80);
-http.createServer(daServer).listen(3000);
+http.createServer(daServer).listen(process.env.PORT || 80);
 
