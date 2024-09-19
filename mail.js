@@ -18,7 +18,7 @@ exports.sendEmail = (subject,body,signature,filenameList=[]) => {
       attachments: attachments
     };
     transporter.sendMail(mailContent, function(error, info){
-      if (error) { console.log(error) } 
+      if (error) { console.log(error); return  } 
       for (var filename of filenameList) {
         fs.unlink("temp/"+filename, (err) => { if (err) { console.error(err) } });
       }
