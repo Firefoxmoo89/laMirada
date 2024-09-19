@@ -66,7 +66,7 @@ function daServer(request, response) {
     if (extension == "svg") { extension = "svg+xml" }
     rad.serveFile(deets.pathname.slice(1),200,{"Content-type":"image/"+extension},response) 
   }
-  else if (deets.pathname == "/sitemap") { rad.serveFile("sitemap.xml",200,{},response) }
+  else if (deets.pathname == "/sitemap.xml") { rad.serveFile("sitemap.xml",200,{},response) }
   else if (deets.pathname =="/favicon.ico") {rad.serveFile("image/icon/favicon.ico",200,{},response)}
   else { rad.servePage("missing",404,{},response) }
 }
