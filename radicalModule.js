@@ -27,8 +27,11 @@ exports.processPOST = (request,daFunction) => {
   var form = new formidable.IncomingForm({
     multiples: true, uploadDir: "temp/", maxFileSize: 500 * 1024 * 1024, keepExtensions: true, 
     filename: (name, ext, part, form) => { 
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; newName = "";
-      for (let i=0;i<16;i++) { newName += characters.charAt(Math.floor(Math.random()*characters.length)) }
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; newName = ""; fresh = false
+      while (!fresh) { console.log(newName);
+        for (let i=0;i<16;i++) { newName += characters.charAt(Math.floor(Math.random()*characters.length)) }
+        if (!fs.readdirSync("temp/").includes(newName+ext)) { fresh = true }
+      }
       filenameList.push(newName+ext);
       return newName+ext
     }
