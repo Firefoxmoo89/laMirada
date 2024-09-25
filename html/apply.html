@@ -372,8 +372,8 @@
       submitButton.innerHTML = "<img src='image/icon/loadingIcon.gif' alt='loading' style='width:20px;height:20px'>";
       document.querySelector("#findBox").style.display = "none";
       toggleProcessCursor(document.body);
-      submitForm("/apply", (data) => {
-        toggleProcessCursor(document.body); alert(data["response"]); submitButton.innerHTML = "Submit";
+      submitForm("/apply", (response) => {
+        toggleProcessCursor(document.body); alert(response); submitButton.innerHTML = "Submit";
       });
     }}
   });
